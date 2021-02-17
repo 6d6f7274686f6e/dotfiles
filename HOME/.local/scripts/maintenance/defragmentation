@@ -1,2 +1,0 @@
-#!/bin/bash
-sudo btrfs filesystem defragment -r -v /home
