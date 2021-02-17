@@ -21,7 +21,7 @@ Here's a list of some of the packages I use. Most of them are available on offic
 * WiFi : [wpa_supplicant](https://w1.fi/wpa_supplicant/)
 * Audio : [pulseaudio](https://www.freedesktop.org/wiki/Software/PulseAudio/) on top of [ALSA](https://www.alsa-project.org), with [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/)
 * Input : [ibus](https://github.com/ibus/ibus/wiki) (change keyboard layouts on the fly)
-* Editor : [neovim](https://neovim.io) with some plugins (see below)
+* Editor : [neovim](https://neovim.io) with plugins (details below)
 * File explorer : [ranger](https://ranger.github.io)
 * PDF viewer : [zathura](https://pwmt.org/projects/zathura/)
 * Image viewer : [feh](https://feh.finalrewind.org/)
@@ -31,15 +31,27 @@ Here's a list of some of the packages I use. Most of them are available on offic
 * Windows emulation : [wine](http://www.winehq.com) with [winetricks](https://wiki.winehq.org/winetricks)
 * Games : [Steam](https://steampowered.com/)
 * Voice chat : [Discord](https://discordapp.com)
-* Color theme : Auto-generated from my wallpaper with [wal](https://github.com/dylanaraps/wal), [oomox/themix](https://github.com/themix-project/oomox) and an additional custom script.
+* Schedule daemon : [cronie](https://github.com/cronie-crond/cronie/)
+* Color theme : Auto-generated from my wallpaper with [wal](https://github.com/dylanaraps/wal), [oomox/themix](https://github.com/themix-project/oomox), [LXAppearance](https://wiki.lxde.org/en/LXAppearance), and an additional custom script.
 * Additional fonts : [FontAwesome](https://github.com/gabrielelana/awesome-terminal-fonts), [powerline fonts](https://github.com/powerline/powerline), [nerd fonts](https://github.com/ryanoasis/nerd-fonts)
-* Extra : [numlockx](https://github.com/rg3/numlockx) (always have numlock key activated at startup), [twitter](http://mike.verdone.ca/twitter/) (with Python 2), etc
+* Extra : [numlockx](https://github.com/rg3/numlockx) (always have numlock key activated at startup), [twitter](http://mike.verdone.ca/twitter/) (with Python 2), [calcurse](https://calcurse.org/) (calendar), [cpupower](https://www.kernel.org) (for [CPU frequency scaling](https://wiki.archlinux.org/index.php/CPU_frequency_scaling), ...
 * And probably more. (<++>)
 
 ## Installation
 This "installation guide" assumes you perform it on a *fresh* install. You'll most likely break things if you follow it blindly on an old one.
 
-Basically, all you have to do is copy the contents of the `HOME` folder into your home folder, `ETC` into `/etc/` and so on (<++>), make sure you read the following subsections, and then reboot.
+Basically, all you have to do is copy the contents of the `HOME` folder into your home folder, `ETC` into `/etc/` (pay attention to any file you could overwrite), then read the following subsections,
+and reboot.
+
+### rEFInd
+You'll have to install rEFInd on your own since it will be specific to your system. I personally use the `/boot/refind_linux.conf` file but I think this may depend on how you installed it.
+To use the same [theme](https://github.com/EvanPurkhiser/rEFInd-minimal/) as me, copy `BOOT/EFI/refind/themes/rEFInd-minimal` into `/boot/EFI/refind/themes/` and add `include themes/rEFInd-minimal/theme.conf`
+at the end of `/boot/EFI/refind/refind.conf`.
+
+### LightDM
+This is pretty straightforward. You just need to enable the `lightdm` service with `systemctl enable lightdm` (or whatever else you use on your system to enable a desktop manager)
+and put your username in `/etc/lightdm/lightdm-mini-greeter.conf`.
+This install uses a custom background and colors but you can also change that quite easily by reading the comments in `/etc/lightdm/lightdm-mini-greeter.conf`.
 
 ### Profile file
 The first paragraph defines XDG folders : you can change them to different folders if you'd like but I wouldn't advise you to do so.
@@ -53,14 +65,9 @@ The third paragraph lists environment variable for various applications that you
 
 I suggest you leave them here just in case you need to install one of those applications.
 
-### rEFInd
-<++>
-
-### LightDM
-<++>
-
 ### i3
-<++>
+Make sure you read the i3 config file at `~/.config/i3/config` and change the keybindings to your liking. You'll **need** to do this if you don't have a french AZERTY keyboard.
+There's also some screen setup in there that most likely won't work on your system.
 
 ### ZSH
 Configuration files for ZSH are located in `~/.config/zsh/`. When starting a console session without a graphical environment, it will try to read the `~/.zshrc` file: to avoid duplicates,
@@ -80,7 +87,8 @@ Then start `nvim` and type `:PluginInstall` to install the plugins listed in `~/
 Quit and restart Neovim; if you get any errors, it should go away if you type `:UpdateRemotePlugins` and restart.
 
 ### crond
-<++>
+I use `cronie` to trigger alarms when it's late or someone replies to me on Twitter. Use `crontab -e` to edit the schedule, you can copy my configuration from `EXTRA/crontab` (replacing `YOUR_NAME`
+by your username).
 
 ### Music 
 <++>
@@ -105,7 +113,7 @@ They'll only be useful if you use [BTRFS](https://btrfs.wiki.kernel.org) on your
 If you have BTRFS installed I'd assume you know what you are doing and should be able to correctly modify these scripts to suit your needs anyway.
 The `deduplication` script depends on [duperemove](https://github.com/markfasheh/duperemove).
 
-### GTK color theme
+### Theme
 <++>
 
 ## Additional details
@@ -117,6 +125,7 @@ along with this
 [catalog of supported and unsupported applications](https://wiki.archlinux.org/index.php/XDG_Base_Directory#Support) on the Arch Linux Wiki.
 I chose to put related environment variables in the `~/.profile/` file because LightDM loads this file before starting the X Server.
 Aliases went into the `~/.config/zsh/.zshrc` file.
+
 Unfortunately, a lot of applications have hardcoded paths which often can't be modified without using unstable cheap tricks like modifying the source code directly or 
 calling the program with a different `$HOME` environment variable.
 
