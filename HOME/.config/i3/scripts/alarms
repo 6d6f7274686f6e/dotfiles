@@ -1,0 +1,6 @@
+#!/bin/bash
+
+pgrep entr && killall entr
+
+ls $XDG_CONFIG_HOME/i3/alarms/twitter | entr -p notify-send -t 10000 -u low 'Twitter' 'Somebody replied to you!' &
+ls $XDG_CONFIG_HOME/i3/alarms/gotobed | entr -p notify-send -t 30000 "Alarme" "Il est l'heure de dormir" &

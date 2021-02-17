@@ -1,2 +1,140 @@
 # dotfiles
-arch linux configuration files
+Those are configuration files for my Arch Linux install.
+It should work with other distributions too.
+
+**NB**: This is a work in progress ! `<++>` markers indicate text I have yet to write.
+
+## Components
+Here's a list of some of the packages I use. Most of them are available on official repositories or the AUR.
+* Boot manager : [rEFInd](https://www.rodsbooks.com/refind/)
+* Display manager : [lightdm](https://github.com/canonical/lightdm) with
+[lightdm-mini-greeter](https://github.com/prikhi/lightdm-mini-greeter)
+* Window manager : [i3-gaps](https://github.com/Airblader/i3)
+* Composite window manager : [xcompmgr](https://xorg.freedesktop.org/)
+* Notification manager : [dunst](https://dunst-project.org/)
+* Lock screen : [i3lock-color](https://github.com/Raymo111/i3lock-color)
+* Application launcher : [rofi](https://github.com/DaveDavenport/rofi)
+* Terminal : [rxvt-unicode](http://software.schmorp.de/pkg/rxvt-unicode.html) with [powerline](https://github.com/powerline/powerline) and the [resize-font](https://github.com/simmel/urxvt-resize-font) plugin.
+* Shell : [zsh](https://www.zsh.org)
+* Graphics card driver : [nvidia](https://www.nvidia.com)
+* Disk Management : [udisks](https://www.freedesktop.org/wiki/Software/udisks)
+* WiFi : [wpa_supplicant](https://w1.fi/wpa_supplicant/)
+* Audio : [pulseaudio](https://www.freedesktop.org/wiki/Software/PulseAudio/) on top of [ALSA](https://www.alsa-project.org), with [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/)
+* Input : [ibus](https://github.com/ibus/ibus/wiki) (change keyboard layouts on the fly)
+* Editor : [neovim](https://neovim.io) with some plugins (see below)
+* File explorer : [ranger](https://ranger.github.io)
+* PDF viewer : [zathura](https://pwmt.org/projects/zathura/)
+* Image viewer : [feh](https://feh.finalrewind.org/)
+* Music player : [mpd](https://www.musicpd.org), controlled via [ncmpcpp](https://ncmpcpp.rybczak.net/), scrobbling with [yams](https://github.com/Berulacks/yams)
+* Video player : [mpv](https://mpv.io/)
+* Web browser : [firefox](https://www.mozilla.org/firefox) with a load of privacy plugins and extensions
+* Windows emulation : [wine](http://www.winehq.com) with [winetricks](https://wiki.winehq.org/winetricks)
+* Games : [Steam](https://steampowered.com/)
+* Voice chat : [Discord](https://discordapp.com)
+* Color theme : Auto-generated from my wallpaper with [wal](https://github.com/dylanaraps/wal), [oomox/themix](https://github.com/themix-project/oomox) and an additional custom script.
+* Additional fonts : [FontAwesome](https://github.com/gabrielelana/awesome-terminal-fonts), [powerline fonts](https://github.com/powerline/powerline), [nerd fonts](https://github.com/ryanoasis/nerd-fonts)
+* Extra : [numlockx](https://github.com/rg3/numlockx) (always have numlock key activated at startup), [twitter](http://mike.verdone.ca/twitter/) (with Python 2), etc
+* And probably more. (<++>)
+
+## Installation
+This "installation guide" assumes you perform it on a *fresh* install. You'll most likely break things if you follow it blindly on an old one.
+
+Basically, all you have to do is copy the contents of the `HOME` folder into your home folder, `ETC` into `/etc/` and so on (<++>), make sure you read the following subsections, and then reboot.
+
+### Profile file
+The first paragraph defines XDG folders : you can change them to different folders if you'd like but I wouldn't advise you to do so.
+From now on, I'll assume that your XDG folder variables are the same as mine: for example I'll write `~/.config/` in lieu of `$XDG_CONFIG_HOME`.
+
+The third paragraph lists environment variable for various applications that you may or may not need : 
+* [rust](https://www.rust-lang.org/)
+* [nvidia](https://www.nvidia.com/)
+* [wine](http://www.winehq.com)
+* [stack](https://docs.haskellstack.org/en/stable/README/)
+
+I suggest you leave them here just in case you need to install one of those applications.
+
+### rEFInd
+<++>
+
+### LightDM
+<++>
+
+### i3
+<++>
+
+### ZSH
+Configuration files for ZSH are located in `~/.config/zsh/`. When starting a console session without a graphical environment, it will try to read the `~/.zshrc` file: to avoid duplicates,
+you'll have to link it with `ln -s ~/.config/zsh/.zshrc ~/.zshrc`
+
+### Wine
+Wine prefixes are stored in `~/.local/share/wine/xxbit/` where `xx` is either `32` or `64`. It will default to 32bit when run as `wine`, and 64bit when run as `wine64`.
+I think that you'll have to create the `~/.local/share/wine` folder before starting Wine for the first time.
+
+I like to have a shared `My Documents` directory between my two prefixes. To do so, first run `winecfg` then `winecfg64` to generate both prefixes if they do not exist yet, 
+then `cp -r ~/.local/share/wine/32bit/drive_c/users/YOUR_NAME ~/.local/share/wine/docs/`, `rm -r ~/.local/share/wine/{32,64}bit/drive_c/users/YOUR_NAME` and
+finally `ln -s ~/.local/share/wine/docs/ ~/.local/share/wine/{32,64}bit/drive_c/users/YOUR_NAME`.
+
+### Neovim
+Neovim needs a little bit of setup. First, run `git clone https://github.com/VundleVim/Vundle.vim.git ~/.config/nvim/bundle/Vundle.vim`.
+Then start `nvim` and type `:PluginInstall` to install the plugins listed in `~/.config/nvim/init.vim` (don't hesitate to comment out those you don't need or add your own!).
+Quit and restart Neovim; if you get any errors, it should go away if you type `:UpdateRemotePlugins` and restart.
+
+### crond
+<++>
+
+### Music 
+<++>
+
+### Twitter
+<++>
+
+### Admin scripts
+Subfolders of `~/.local/scripts/` store scripts that should only be executed with admin privileges.
+Their ownership have to be set to root with `sudo chown root:root SCRIPT`. You should also make sure that they are executable with `sudo chmod +x SCRIPT`.
+
+Scripts in the `internet` subfolder manage, well, internet connections.
+You should change the `enp3s0` and `wlp2s0` to whatever your ethernet and wifi interfaces' names are (you can get them with `ip link`).
+Also included is a WiFi script that use the `/etc/wpa_supplicant/wifi_example.conf`, which has to be modified to connect to your desired access point.
+By default, you can choose to launch one of these internet scripts by hitting the `Super+Shift+N` keys in i3.
+
+The `powerplans` subfolder holds scripts that change the computer speeds to maximize either performance or battery life. They are specific to Intel computers and you ideally shouldn't have
+to use them unless your computer has temperature or battery issues.
+
+I run the `maintenance` scripts roughly one time per month, to free up space on my home partition.
+They'll only be useful if you use [BTRFS](https://btrfs.wiki.kernel.org) on your home partition.
+If you have BTRFS installed I'd assume you know what you are doing and should be able to correctly modify these scripts to suit your needs anyway.
+The `deduplication` script depends on [duperemove](https://github.com/markfasheh/duperemove).
+
+### GTK color theme
+<++>
+
+## Additional details
+### Home cleaning
+I like to keep my Home folder clean, with as little hidden files and folders as possible.
+Most of this is made possible by the
+[XDG Base Directory specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html), 
+along with this
+[catalog of supported and unsupported applications](https://wiki.archlinux.org/index.php/XDG_Base_Directory#Support) on the Arch Linux Wiki.
+I chose to put related environment variables in the `~/.profile/` file because LightDM loads this file before starting the X Server.
+Aliases went into the `~/.config/zsh/.zshrc` file.
+Unfortunately, a lot of applications have hardcoded paths which often can't be modified without using unstable cheap tricks like modifying the source code directly or 
+calling the program with a different `$HOME` environment variable.
+
+### Haskell
+Developing in Haskell on Arch Linux with the official repositories became a huge pain since the
+[switch to dynamically linked packages](https://www.reddit.com/r/linux/comments/9emwtu/arch_linux_ama/e5qssdz/?context=3),
+which generates **lots** of dependencies on small `haskell-` packages.
+Because of this, I prefer to use a direct installation of [stack](https://docs.haskellstack.org/en/stable/README/) (via `curl -sSL https://get.haskellstack.org/ | sh` and `stack upgrade`)
+and only install haskell packages with `stack install`.
+
+### Fonts 
+I use additional fonts to display foreign languages in the terminal:
+* South Asian : [sanskrit-fonts](http://github.com/sanskrit-coders/sanskrit-fonts), [sil-padauk](https://software.sil.org/padauk/)
+* Korean : [baekmuk](https://kldp.net/baekmuk/)
+* Japanese : [Hanazono](https://fonts.jp/hanazono/), [Kochi](http://sourceforge.jp/projects/efont/)
+
+### BTRFS
+I use [BTRFS](https://btrfs.wiki.kernel.org) on my home partition. More details coming soon (<++>).
+
+### MPDiscord
+<++>

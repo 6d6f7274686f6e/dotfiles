@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+source $XDG_CACHE_HOME/wal/colors.sh
+source ~/.profile # temp until Xserver restart
+
+n=$(ls $ADMINSCRIPTS/internet | wc -l)
+[ $n -gt 5 ] && n=5
+
+answer=$(ls $ADMINSCRIPTS/internet/ | rofi -dmenu -i -p "Use Internet script" -lines $n \
+  -hide-scrollbar -font "Whatever 18" -color-window "$color0,$color7,$color1")
+
+[ -z $answer ] \
+  || (zenity --password --text "Connect to $answer" | sudo -S "$ADMINSCRIPTS/internet/$answer" 2>/dev/null) \
+  || notify-send -u low "sudo" "Wrong Password"
