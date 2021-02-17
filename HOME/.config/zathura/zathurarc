@@ -1,8 +1,0 @@
-set page-padding 0
-set default-bg "#1D3D56"
-set default-fg "#DBD4A7"
-set statusbar-bg "#709689"
-set statusbar-fg "#DBD4A7"
-set recolor-keephue "false"
-set recolor-lightcolor "#1D3D56"
-set recolor-darkcolor "#DBD4A7"

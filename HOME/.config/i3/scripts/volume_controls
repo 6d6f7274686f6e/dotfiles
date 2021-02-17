@@ -1,4 +1,0 @@
-#!/bin/bash
-
-pgrep pavucontrol > /dev/null && killall pavucontrol && exit
-i3-msg -q exec pavucontrol

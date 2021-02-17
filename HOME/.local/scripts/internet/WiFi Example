@@ -1,4 +1,0 @@
-sudo ip link set wlp2s0 up
-sudo killall -9 wpa_supplicant
-sudo wpa_supplicant -B -iwlp2s0 -c/etc/wpa_supplicant/wifi_example.conf
-sudo dhcpcd -n wlp2s0
