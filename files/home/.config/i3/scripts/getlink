@@ -1,0 +1,7 @@
+#!/bin/sh
+
+source $XDG_CACHE_HOME/wal/colors.sh
+
+link=$(echo "" | rofi -dmenu -i -p "URL" -lines 0 -font "Whatever 18" -color-window "$color0,$color7,$color1")
+sleep 1
+[ "$link" ] && $XDG_CONFIG_HOME/i3/scripts/handlelink "$link"

@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+source $XDG_CACHE_HOME/wal/colors.sh
+
+tweet=$(echo "Cancel" | rofi -dmenu -i -p "Tweet" -lines 1 -font "Whatever 18" -color-window \
+ "$color0,$color7,$color1" -hide-scrollbar)
+
+[ "$tweet" == "Cancel" ] || twitter --oauth=$XDG_CONFIG_HOME/.twitter_oauth set "$tweet"

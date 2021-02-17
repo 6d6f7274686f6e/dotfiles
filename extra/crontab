@@ -1,0 +1,4 @@
+DISPLAY=:0
+#min hour day month DayOfWeek Command
+30   23   *   *     *         touch /home/YOUR_NAME/.config/i3/alarms/gotobed 
+*/1  *    *   *     *         /bin/zsh /home/YOUR_NAME/.config/i3/scripts/check_twitter
