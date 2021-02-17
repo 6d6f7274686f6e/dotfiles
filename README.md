@@ -2,8 +2,6 @@
 Those are configuration files for my Arch Linux install.
 It should work with other distributions too.
 
-**NB**: This is a work in progress ! `<++>` markers indicate text I have yet to write.
-
 ## Components
 Here's a list of some of the packages I use. Most of them are available on official repositories or the AUR.
 * Boot manager : [rEFInd](https://www.rodsbooks.com/refind/)
@@ -34,8 +32,8 @@ Here's a list of some of the packages I use. Most of them are available on offic
 * Schedule daemon : [cronie](https://github.com/cronie-crond/cronie/)
 * Color theme : Auto-generated from my wallpaper with [wal](https://github.com/dylanaraps/wal), [oomox/themix](https://github.com/themix-project/oomox), [LXAppearance](https://wiki.lxde.org/en/LXAppearance), and an additional custom script.
 * Additional fonts : [FontAwesome](https://github.com/gabrielelana/awesome-terminal-fonts), [powerline fonts](https://github.com/powerline/powerline), [nerd fonts](https://github.com/ryanoasis/nerd-fonts)
-* Extra : [numlockx](https://github.com/rg3/numlockx) (always have numlock key activated at startup), [twitter](http://mike.verdone.ca/twitter/) (with Python 2), [calcurse](https://calcurse.org/) (calendar), [cpupower](https://www.kernel.org) (for [CPU frequency scaling](https://wiki.archlinux.org/index.php/CPU_frequency_scaling), ...
-* And probably more. (<++>)
+* Extra : [numlockx](https://github.com/rg3/numlockx) (always have numlock key activated at startup), [twitter](http://mike.verdone.ca/twitter/) (with Python 2), [calcurse](https://calcurse.org/) (calendar), [cpupower](https://www.kernel.org) (for [CPU frequency scaling](https://wiki.archlinux.org/index.php/CPU_frequency_scaling)), ...
+* And probably more.
 
 ## Installation
 This "installation guide" assumes you perform it on a *fresh* install. You'll most likely break things if you follow it blindly on an old one.
@@ -54,7 +52,7 @@ and put your username in `/etc/lightdm/lightdm-mini-greeter.conf`.
 This install uses a custom background and colors but you can also change that quite easily by reading the comments in `/etc/lightdm/lightdm-mini-greeter.conf`.
 
 ### Profile file
-The first paragraph defines XDG folders : you can change them to different folders if you'd like but I wouldn't advise you to do so.
+The first paragraph in `~/.profile` defines XDG folders : you can change them to different folders if you'd like but I wouldn't advise you to do so.
 From now on, I'll assume that your XDG folder variables are the same as mine: for example I'll write `~/.config/` in lieu of `$XDG_CONFIG_HOME`.
 
 The third paragraph lists environment variable for various applications that you may or may not need : 
@@ -69,9 +67,13 @@ I suggest you leave them here just in case you need to install one of those appl
 Make sure you read the i3 config file at `~/.config/i3/config` and change the keybindings to your liking. You'll **need** to do this if you don't have a french AZERTY keyboard.
 There's also some screen setup in there that most likely won't work on your system.
 
+There are various utility scripts under `~/.config/i3/scripts/`, and `i3blocks` (the i3 status bar) relies on those in `~/.config/i3/scripts/i3blocks/`. You should also read them
+to learn about the various things that can be done by clicking on the status bar.
+
 ### ZSH
-Configuration files for ZSH are located in `~/.config/zsh/`. When starting a console session without a graphical environment, it will try to read the `~/.zshrc` file: to avoid duplicates,
-you'll have to link it with `ln -s ~/.config/zsh/.zshrc ~/.zshrc`
+Set ZSH as your default shell by typing `chsh -s /bin/zsh`.
+Its configuration files are located in `~/.config/zsh/`. When starting a console session without a graphical environment, it will try to read the `~/.zshrc` file:
+to avoid duplicates, you'll have to link it with `ln -s ~/.config/zsh/.zshrc ~/.zshrc`. 
 
 ### Wine
 Wine prefixes are stored in `~/.local/share/wine/xxbit/` where `xx` is either `32` or `64`. It will default to 32bit when run as `wine`, and 64bit when run as `wine64`.
@@ -91,10 +93,14 @@ I use `cronie` to trigger alarms when it's late or someone replies to me on Twit
 by your username).
 
 ### Music 
-<++>
+Configuration files for music applications are `~/.config/mpd/mpd.conf` and `~/.config/ncmpcpp/config`.
+You'll need to change `~/Music` to wherever your music library is located in both of those files.
+
+To scrobble tracks to [last.fm](https://last.fm), I use [YAMS](https://github.com/Berulacks/yams).
 
 ### Twitter
-<++>
+I installed a small twitter command-line utility with `pip2 install twitter`. Right after that, run `twitter` in the command line and follow the instructions to authentificate.
+All the twitter scripts should run normally from now on.
 
 ### Admin scripts
 Subfolders of `~/.local/scripts/` store scripts that should only be executed with admin privileges.
@@ -114,7 +120,15 @@ If you have BTRFS installed I'd assume you know what you are doing and should be
 The `deduplication` script depends on [duperemove](https://github.com/markfasheh/duperemove).
 
 ### Theme
-<++>
+Themes are automatically generated from your wallpaper with the `~/.config/i3/scripts/theme` script.
+When given no arguments (or only the `transparent` argument), this script will try to set the theme from the [wal](https://github.com/dylanaraps/wal) configuration (which may not exist).
+To get colors from a wallpaper, pass the image's path to the script.
+If you add the `transparent` argument, it will make the terminal windows slightly transparent (this only works with [urxvt](http://software.schmorp.de/pkg/rxvt-unicode.html)).
+
+The script can be called in [ranger](https://ranger.github.io) with the `bg` shortcut (or `bt` if you want transparent terminals). 
+
+By default, it will also generate a GTK theme. To activate this theme, run `lxappearance`, choose the `oomox-autotheme` theme in the list on the left, and click `Apply` then `Close`.
+You won't need to do this anymore after that, even if you change your wallpaper and theme. You can even delete the `.icons` folder and `.gtkrc-x.x` file it created in your home folder without consequences.
 
 ## Additional details
 ### Home cleaning
@@ -143,7 +157,11 @@ I use additional fonts to display foreign languages in the terminal:
 * Japanese : [Hanazono](https://fonts.jp/hanazono/), [Kochi](http://sourceforge.jp/projects/efont/)
 
 ### BTRFS
-I use [BTRFS](https://btrfs.wiki.kernel.org) on my home partition. More details coming soon (<++>).
+I use [BTRFS](https://btrfs.wiki.kernel.org) on my home partition. It allows for instantaneous backups (with Copy-On-Write) and, above all, file compression and deduplication, which I am very happy to use. 
+I run the scripts in the `~/.local/scripts/maintenance/` folder roughly one time per month to defragment and deduplicate my partition and gain even more disk space. I haven't gotten into any trouble with
+this filesystem so far.
 
 ### MPDiscord
-<++>
+[mpd_discord_richpresence](https://github.com/justas-d/mpd-rich-presence-discord) is a daemon that runs in the background and sends mpd's current song to Discord, displaying it below your username.
+I don't like the default MPD logo, so I changed it for a very simple "musical note" logo and put that in my own application (and called it `mpdiscord`).
+I didn't release it yet since this is for personal use, but the code doesn't differ much from the original (I basically only changed the application ID).
