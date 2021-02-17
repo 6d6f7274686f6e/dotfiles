@@ -2,7 +2,7 @@
 
 source $XDG_CACHE_HOME/wal/colors.sh
 
-mountable=$(lsblk -lp -o FSTYPE,NAME,LABEL,TYPE,MOUNTPOINT | grep -e "part $" | grep -v -e "^\s" -e "/dev/sda" | awk '{print $2, "(" $3 ")"}')
+mountable=$(lsblk -lp -o FSTYPE,NAME,LABEL,TYPE,MOUNTPOINT | grep -e "part $" | grep -v -e "^\s" | awk '{print $2, "(" $3 ")"}')
 [[ "$mountable" = "" ]] && notify-send -u critical "Auto-Mount" "No mountable drive detected." && exit
 lines=$(echo "$mountable" | wc -l)
 chosen=$(echo "$mountable" | rofi -dmenu -i -p "Mountable drives" -lines $lines \
