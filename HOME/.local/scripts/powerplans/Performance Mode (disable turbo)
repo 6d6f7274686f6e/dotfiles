@@ -1,0 +1,6 @@
+sudo tlp ac
+sudo intel-undervolt apply
+sudo x86_energy_perf_policy performance
+sudo cpupower-gui energy --pref performance
+sudo x86_energy_perf_policy --turbo-enable 0
+sudo cpupower frequency-set -g performance
