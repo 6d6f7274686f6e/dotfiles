@@ -1,0 +1,5 @@
+export __GL_SHADER_DISK_CACHE_PATH=~/.cache/nv/
+export ERRFILE=~/.config/xserver/xsessions-errors
+#export XAUTHORITY=~/.config/xserver/Xauthority
+setxkbmap fr
+i3

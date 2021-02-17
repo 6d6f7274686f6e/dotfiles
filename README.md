@@ -38,13 +38,13 @@ Here's a list of some of the packages I use. Most of them are available on offic
 ## Installation
 This "installation guide" assumes you perform it on a *fresh* install. You'll most likely break things if you follow it blindly on an old one.
 
-Basically, all you have to do is copy the contents of the `HOME` folder into your home folder, `ETC` into `/etc/` (pay attention to any file you could overwrite), then read the following subsections,
-and reboot.
+Basically, all you have to do is copy the contents of the `files/home/` folder into your home folder, `files/etc/` into `/etc/`, ... (pay attention to any file you could overwrite),
+then read the following subsections, and reboot.
 
 ### rEFInd
 You'll have to install rEFInd on your own since it will be specific to your system. I personally use the `/boot/refind_linux.conf` file but I think this may depend on how you installed it.
-To use the same [theme](https://github.com/EvanPurkhiser/rEFInd-minimal/) as me, copy `BOOT/EFI/refind/themes/rEFInd-minimal` into `/boot/EFI/refind/themes/` and add `include themes/rEFInd-minimal/theme.conf`
-at the end of `/boot/EFI/refind/refind.conf`.
+To use the same [theme](https://github.com/EvanPurkhiser/rEFInd-minimal/) as me, copy `files/boot/EFI/refind/themes/rEFInd-minimal` into `/boot/EFI/refind/themes/` and add
+`include themes/rEFInd-minimal/theme.conf` at the end of `/boot/EFI/refind/refind.conf`.
 
 ### LightDM
 This is pretty straightforward. You just need to enable the `lightdm` service with `systemctl enable lightdm` (or whatever else you use on your system to enable a desktop manager)

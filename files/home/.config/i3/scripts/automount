@@ -1,0 +1,15 @@
+#!/bin/bash
+
+source $XDG_CACHE_HOME/wal/colors.sh
+
+mountable=$(lsblk -lp -o FSTYPE,NAME,LABEL,TYPE,MOUNTPOINT | grep -e "part $" | grep -v -e "^\s" | awk '{print $2, "(" $3 ")"}')
+[[ "$mountable" = "" ]] && notify-send -u critical "Auto-Mount" "No mountable drive detected." && exit
+lines=$(echo "$mountable" | wc -l)
+chosen=$(echo "$mountable" | rofi -dmenu -i -p "Mountable drives" -lines $lines \
+-font 'Whatever 18' -color-window "$color0,$color7,$color1" -hide-scrollbar | awk '{print $1}')
+[[ "$chosen" = "" ]] && exit
+
+answer=$(udisksctl mount -b "$chosen")
+
+[[ "$answer" = "" ]] && notify-send -u critical "Auto-Mount" "Could not mount $chosen." && exit
+notify-send -u normal "Auto-Mount" "$answer" 

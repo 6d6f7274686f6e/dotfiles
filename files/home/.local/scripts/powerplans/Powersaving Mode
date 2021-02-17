@@ -1,0 +1,6 @@
+sudo tlp bat
+sudo intel-undervolt apply
+sudo x86_energy_perf_policy power
+sudo x86_energy_perf_policy --turbo-enable 0
+sudo cpupower frequency-set -g powersave
+sudo cpupower-gui energy --pref power

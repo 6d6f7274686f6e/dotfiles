@@ -1,0 +1,9 @@
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _complete _ignored
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+zstyle :compinstall filename '$XDG_CONFIG_HOME/zsh/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
