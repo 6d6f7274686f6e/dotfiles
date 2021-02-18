@@ -9,6 +9,6 @@ n=$(ls $ADMINSCRIPTS/internet | wc -l)
 answer=$(ls $ADMINSCRIPTS/internet/ | rofi -dmenu -i -p "Use Internet script" -lines $n \
   -hide-scrollbar -font "Whatever 18" -color-window "$color0,$color7,$color1")
 
-[ -z $answer ] \
+[ -z "$answer" ] \
   || (zenity --password --text "Connect to $answer" | sudo -S "$ADMINSCRIPTS/internet/$answer" 2>/dev/null) \
   || notify-send -u low "sudo" "Wrong Password"

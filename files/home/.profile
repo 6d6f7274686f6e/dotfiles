@@ -13,7 +13,7 @@ export GTK_RC_FILES=$XDG_CONFIG_HOME/gtk-1.0/gtkrc
 export LESSHISTFILE=- # disables less history
 export SUDO_EDITOR=nvim
 export EDITOR=nvim
-export ADMINSCRIPTS=$HOME/.local/scripts
+export ADMINSCRIPTS=/usr/local/sbin/scripts
 export PATH=$PATH:$ADMINSCRIPTS:$HOME/.local/bin
 
 export CARGO_HOME=$XDG_CONFIG_HOME/cargo
