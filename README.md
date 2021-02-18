@@ -82,7 +82,6 @@ to avoid duplicates, you'll have to link it with `ln -s ~/.config/zsh/.zshrc ~/.
 
 ### Wine
 Wine prefixes are stored in `~/.local/share/wine/xxbit/` where `xx` is either `32` or `64`. It will default to 32bit when run as `wine`, and 64bit when run as `wine64`.
-I think that you'll have to create the `~/.local/share/wine` folder before starting Wine for the first time.
 
 I like to have a shared `My Documents` directory between my two prefixes. To do so, first run `winecfg` then `winecfg64` to generate both prefixes if they do not exist yet, 
 then `cp -r ~/.local/share/wine/32bit/drive_c/users/YOUR_NAME ~/.local/share/wine/docs/`, `rm -r ~/.local/share/wine/{32,64}bit/drive_c/users/YOUR_NAME` and
