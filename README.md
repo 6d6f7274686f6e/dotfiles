@@ -5,19 +5,20 @@ It should work with other distributions too.
 ## Components
 Here's a list of some of the packages I use. Most of them are available on official repositories or the AUR.
 * Boot manager : [rEFInd](https://www.rodsbooks.com/refind/) with the [rEFInd-minimal](https://github.com/EvanPurkhiser/rEFInd-minimal/) theme.
-* Display manager : [lightdm](https://github.com/canonical/lightdm) with
-[lightdm-mini-greeter](https://github.com/prikhi/lightdm-mini-greeter)
+* Display manager : [lightdm](https://github.com/canonical/lightdm) with [lightdm-mini-greeter](https://github.com/prikhi/lightdm-mini-greeter)
 * Window manager : [i3-gaps](https://github.com/Airblader/i3)
 * Composite window manager : [xcompmgr](https://xorg.freedesktop.org/)
 * Notification manager : [dunst](https://dunst-project.org/)
 * Lock screen : [i3lock-color](https://github.com/Raymo111/i3lock-color)
 * Application launcher : [rofi](https://github.com/DaveDavenport/rofi)
-* Terminal : [rxvt-unicode](http://software.schmorp.de/pkg/rxvt-unicode.html) with [powerline](https://github.com/powerline/powerline) and the [resize-font](https://github.com/simmel/urxvt-resize-font) plugin.
+* Terminal : [rxvt-unicode](http://software.schmorp.de/pkg/rxvt-unicode.html) with [powerline](https://github.com/powerline/powerline)
+  and the [resize-font](https://github.com/simmel/urxvt-resize-font) plugin.
 * Shell : [zsh](https://www.zsh.org)
 * Graphics card driver : [nvidia](https://www.nvidia.com)
 * Disk Management : [udisks](https://www.freedesktop.org/wiki/Software/udisks)
 * WiFi : [wpa_supplicant](https://w1.fi/wpa_supplicant/)
-* Audio : [pulseaudio](https://www.freedesktop.org/wiki/Software/PulseAudio/) on top of [ALSA](https://www.alsa-project.org), with [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/)
+* Audio : [pulseaudio](https://www.freedesktop.org/wiki/Software/PulseAudio/) on top of [ALSA](https://www.alsa-project.org),
+  with [pavucontrol](https://freedesktop.org/software/pulseaudio/pavucontrol/)
 * Input : [ibus](https://github.com/ibus/ibus/wiki) (change keyboard layouts on the fly)
 * Editor : [neovim](https://neovim.io) with plugins (details below)
 * File explorer : [ranger](https://ranger.github.io)
@@ -30,13 +31,59 @@ Here's a list of some of the packages I use. Most of them are available on offic
 * Games : [Steam](https://steampowered.com/)
 * Voice chat : [Discord](https://discordapp.com)
 * Schedule daemon : [cronie](https://github.com/cronie-crond/cronie/)
-* Color theme : Auto-generated from my wallpaper with [wal](https://github.com/dylanaraps/wal), [oomox/themix](https://github.com/themix-project/oomox), [LXAppearance](https://wiki.lxde.org/en/LXAppearance), and an additional custom script.
-* Additional fonts : [FontAwesome](https://github.com/gabrielelana/awesome-terminal-fonts), [powerline fonts](https://github.com/powerline/powerline), [nerd fonts](https://github.com/ryanoasis/nerd-fonts)
-* Extra : [numlockx](https://github.com/rg3/numlockx) (always have numlock key activated at startup), [twitter](http://mike.verdone.ca/twitter/) (with Python 2), [calcurse](https://calcurse.org/) (calendar), [cpupower](https://www.kernel.org) (for [CPU frequency scaling](https://wiki.archlinux.org/index.php/CPU_frequency_scaling)), ...
+* Calendar : [calcurse](https://calcurse.org/)
+* Twitter command-line client : [python2-twitter](http://mike.verdone.ca/twitter/)
+* Color theme : Auto-generated from my wallpaper with [wal](https://github.com/dylanaraps/wal), [oomox/themix](https://github.com/themix-project/oomox), 
+  [LXAppearance](https://wiki.lxde.org/en/LXAppearance), and additional custom scripts to coordinate every theme files.
+* Fonts : [FontAwesome](https://github.com/gabrielelana/awesome-terminal-fonts), [powerline fonts](https://github.com/powerline/powerline),
+  [nerd fonts](https://github.com/ryanoasis/nerd-fonts)
+* Extra : [numlockx](https://github.com/rg3/numlockx) (always have numlock key activated at startup),
+  [cpupower](https://www.kernel.org) (for [CPU frequency scaling](https://wiki.archlinux.org/index.php/CPU_frequency_scaling)), ...
 * And probably more.
 
-## Installation
-This "installation guide" assumes you perform it on a *fresh* install. You'll most likely break things if you follow it blindly on an old one.
+## Details
+### Scripts 
+I built a bunch of various shell script over the last few years. Most of them can be found under `files/home/.config/i3/scripts`.
+There's also a (conveniently named) subfolder for `i3blocks` scripts.
+### Home cleaning
+I like to keep my Home folder clean, with as little hidden files and folders as possible.
+Most of this is made possible by the
+[XDG Base Directory specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html), 
+along with this
+[catalog of supported and unsupported applications](https://wiki.archlinux.org/index.php/XDG_Base_Directory#Support) on the Arch Linux Wiki.
+I chose to put related environment variables in the `~/.profile/` file because LightDM loads this file before starting the X Server.
+Aliases went into the `~/.config/zsh/.zshrc` file.
+
+Unfortunately, a lot of applications have hardcoded paths which often can't be modified without using unstable cheap tricks like modifying the source code directly or 
+calling the program with a different `$HOME` environment variable.
+
+### Haskell
+Developing in Haskell on Arch Linux with the official repositories became a huge pain since the
+[switch to dynamically linked packages](https://www.reddit.com/r/linux/comments/9emwtu/arch_linux_ama/e5qssdz/?context=3),
+which generates **lots** of dependencies on small `haskell-` packages.
+Because of this, I prefer to use a direct installation of [stack](https://docs.haskellstack.org/en/stable/README/) (via `curl -sSL https://get.haskellstack.org/ | sh` and `stack upgrade`)
+and only install haskell packages with `stack install`.
+
+### Non-latin alphabets fonts 
+I use additional fonts to display non-latin alphabets correctly in the terminal:
+* South Asian : [sanskrit-fonts](http://github.com/sanskrit-coders/sanskrit-fonts), [sil-padauk](https://software.sil.org/padauk/)
+* Korean : [baekmuk](https://kldp.net/baekmuk/)
+* Japanese : [Hanazono](https://fonts.jp/hanazono/), [Kochi](http://sourceforge.jp/projects/efont/)
+
+### BTRFS
+I use [BTRFS](https://btrfs.wiki.kernel.org) on my home partition. It allows for instantaneous backups (with Copy-On-Write) and, above all, file compression and deduplication, which I am very happy to use. 
+I run the scripts in the `/usr/local/sbin/scripts/maintenance/` folder roughly one time per month to defragment and deduplicate my partition and gain even more disk space.
+I haven't gotten into any trouble with this filesystem so far.
+
+### MPDiscord
+[mpd_discord_richpresence](https://github.com/justas-d/mpd-rich-presence-discord) is a daemon that runs in the background and sends mpd's current song to Discord, displaying it below your username.
+I don't like the default MPD logo, so I changed it for a very simple "musical note" logo and put that in my own application (and called it `mpdiscord`).
+I didn't release it yet since this is for personal use, but the code doesn't differ much from the original (I basically only changed the application ID).
+
+## Installation instructions
+Those installation instructions are more like notes to myself than a precise installation guide. 
+You can refer to specific subsection if you want to install a program in particular, however I strongly recommend that you read everything since most of my files refer to one another quite often.
+If you want to directly install all these files, you'll have to do this on a *fresh* install. You'll most likely break things if you follow these instructions blindly on an old one.
 
 Basically, all you have to do is copy the contents of the `files/home/` folder into your home folder, `files/etc/` into `/etc/`, ... (pay attention to any file you could overwrite),
 then read the following subsections, and reboot.
@@ -92,10 +139,6 @@ Neovim needs a little bit of setup. First, run `git clone https://github.com/Vun
 Then start `nvim` and type `:PluginInstall` to install the plugins listed in `~/.config/nvim/init.vim` (don't hesitate to comment out those you don't need or add your own!).
 Quit and restart Neovim; if you get any errors, it should go away if you type `:UpdateRemotePlugins` and restart.
 
-### crond
-I use `cronie` to trigger alarms when it's late or someone replies to me on Twitter. Use `crontab -e` to edit the schedule, you can copy my configuration from `extra/crontab` (replacing `YOUR_NAME`
-by your username).
-
 ### Music 
 Configuration files for music applications are `~/.config/mpd/mpd.conf` and `~/.config/ncmpcpp/config`.
 You'll need to change `~/Music` to wherever your music library is located in both of those files.
@@ -105,6 +148,10 @@ To scrobble tracks to [last.fm](https://last.fm), I use [YAMS](https://github.co
 ### Twitter
 I installed a small twitter command-line utility with `pip2 install twitter`. Right after that, run `twitter` in the command line and follow the instructions to authentificate.
 All the twitter scripts should run normally from now on.
+
+### crond
+I use `cronie` to trigger alarms when it's late or someone replies to me on Twitter. Use `crontab -e` to edit the schedule, you can copy my configuration from `extra/crontab` (replacing `YOUR_NAME`
+by your username).
 
 ### Admin scripts
 Subfolders of `/usr/local/sbin/scripts/` store scripts that should only be executed with admin privileges.
@@ -137,39 +184,3 @@ The script can be called in [ranger](https://ranger.github.io) with the `bg` sho
 
 By default, it will also generate a GTK theme. To activate this theme, run `lxappearance`, choose the `oomox-autotheme` theme in the list on the left, and click `Apply` then `Close`.
 You won't need to do this anymore after that, even if you change your wallpaper and theme. You can even delete the `.icons` folder and `.gtkrc-x.x` file it created in your home folder without consequences.
-
-## Additional details
-### Home cleaning
-I like to keep my Home folder clean, with as little hidden files and folders as possible.
-Most of this is made possible by the
-[XDG Base Directory specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html), 
-along with this
-[catalog of supported and unsupported applications](https://wiki.archlinux.org/index.php/XDG_Base_Directory#Support) on the Arch Linux Wiki.
-I chose to put related environment variables in the `~/.profile/` file because LightDM loads this file before starting the X Server.
-Aliases went into the `~/.config/zsh/.zshrc` file.
-
-Unfortunately, a lot of applications have hardcoded paths which often can't be modified without using unstable cheap tricks like modifying the source code directly or 
-calling the program with a different `$HOME` environment variable.
-
-### Haskell
-Developing in Haskell on Arch Linux with the official repositories became a huge pain since the
-[switch to dynamically linked packages](https://www.reddit.com/r/linux/comments/9emwtu/arch_linux_ama/e5qssdz/?context=3),
-which generates **lots** of dependencies on small `haskell-` packages.
-Because of this, I prefer to use a direct installation of [stack](https://docs.haskellstack.org/en/stable/README/) (via `curl -sSL https://get.haskellstack.org/ | sh` and `stack upgrade`)
-and only install haskell packages with `stack install`.
-
-### Fonts 
-I use additional fonts to display foreign languages in the terminal:
-* South Asian : [sanskrit-fonts](http://github.com/sanskrit-coders/sanskrit-fonts), [sil-padauk](https://software.sil.org/padauk/)
-* Korean : [baekmuk](https://kldp.net/baekmuk/)
-* Japanese : [Hanazono](https://fonts.jp/hanazono/), [Kochi](http://sourceforge.jp/projects/efont/)
-
-### BTRFS
-I use [BTRFS](https://btrfs.wiki.kernel.org) on my home partition. It allows for instantaneous backups (with Copy-On-Write) and, above all, file compression and deduplication, which I am very happy to use. 
-I run the scripts in the `~/.local/scripts/maintenance/` folder roughly one time per month to defragment and deduplicate my partition and gain even more disk space. I haven't gotten into any trouble with
-this filesystem so far.
-
-### MPDiscord
-[mpd_discord_richpresence](https://github.com/justas-d/mpd-rich-presence-discord) is a daemon that runs in the background and sends mpd's current song to Discord, displaying it below your username.
-I don't like the default MPD logo, so I changed it for a very simple "musical note" logo and put that in my own application (and called it `mpdiscord`).
-I didn't release it yet since this is for personal use, but the code doesn't differ much from the original (I basically only changed the application ID).
