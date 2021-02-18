@@ -43,7 +43,7 @@ Here's a list of some of the packages I use. Most of them are available on offic
 
 ## Details
 ### Scripts 
-I built a bunch of various shell script over the last few years. Most of them can be found under `files/home/.config/i3/scripts`.
+I built a bunch of various shell script over the last few years. Most of them can be found under `~/.config/i3/scripts`.
 There's also a (conveniently named) subfolder for `i3blocks` scripts.
 ### Home cleaning
 I like to keep my Home folder clean, with as little hidden files and folders as possible.
