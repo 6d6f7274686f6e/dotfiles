@@ -303,9 +303,9 @@ bindsym $mod+y exec mpc seek -00:00:05
 bindsym $mod+o exec mpc seek +00:00:05
 
 bindsym $mod+n exec "~/.config/i3/scripts/getlink"
-bindsym $mod+shift+n exec "~/.config/i3/scripts/select_internet"
+bindsym $mod+shift+n exec "/usr/local/sbin/scripts/i3/select_internet"
 bindsym $mod+shift+ctrl+n exec "~/.config/i3/scripts/check_internet"
-bindsym $mod+shift+x exec "~/.config/i3/scripts/select_powerplan"
+bindsym $mod+shift+x exec "/usr/local/sbin/scripts/i3/select_powerplan"
 bindsym $mod+ctrl+m exec "~/.config/i3/scripts/automount"
 bindsym $mod+shift+ctrl+m exec "~/.config/i3/scripts/autounmount"
 bindsym $mod+t exec i3-msg open

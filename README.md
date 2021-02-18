@@ -4,7 +4,7 @@ It should work with other distributions too.
 
 ## Components
 Here's a list of some of the packages I use. Most of them are available on official repositories or the AUR.
-* Boot manager : [rEFInd](https://www.rodsbooks.com/refind/)
+* Boot manager : [rEFInd](https://www.rodsbooks.com/refind/) with the [rEFInd-minimal](https://github.com/EvanPurkhiser/rEFInd-minimal/) theme.
 * Display manager : [lightdm](https://github.com/canonical/lightdm) with
 [lightdm-mini-greeter](https://github.com/prikhi/lightdm-mini-greeter)
 * Window manager : [i3-gaps](https://github.com/Airblader/i3)
@@ -70,6 +70,11 @@ There's also some screen setup in there that most likely won't work on your syst
 There are various utility scripts under `~/.config/i3/scripts/`, and `i3blocks` (the i3 status bar) relies on those in `~/.config/i3/scripts/i3blocks/`. You should also read them
 to learn about the various things that can be done by clicking on the status bar.
 
+Some of the scripts that can be launched through shortcuts may ask for your password to launch other scripts with admin privileges. If you want to really be sure that one of these shortcut doesn't
+launch an unwanted malicious script with admin privileges, you can change the `config` ownership to `root` with `sudo chown root:root ~/.config/i3/config/` to make sure it won't be modified
+without you knowing, and you should be fine (or simply never use a script that requires admin privileges through the GUI at all). I understand that it is a bit of a cheap trick but I haven't found
+any better way to keep my admin-privilege-requesting shortcuts without risks.
+
 ### ZSH
 Set ZSH as your default shell by typing `chsh -s /bin/zsh`.
 Its configuration files are located in `~/.config/zsh/`. When starting a console session without a graphical environment, it will try to read the `~/.zshrc` file:
@@ -89,7 +94,7 @@ Then start `nvim` and type `:PluginInstall` to install the plugins listed in `~/
 Quit and restart Neovim; if you get any errors, it should go away if you type `:UpdateRemotePlugins` and restart.
 
 ### crond
-I use `cronie` to trigger alarms when it's late or someone replies to me on Twitter. Use `crontab -e` to edit the schedule, you can copy my configuration from `EXTRA/crontab` (replacing `YOUR_NAME`
+I use `cronie` to trigger alarms when it's late or someone replies to me on Twitter. Use `crontab -e` to edit the schedule, you can copy my configuration from `extra/crontab` (replacing `YOUR_NAME`
 by your username).
 
 ### Music 
@@ -103,8 +108,9 @@ I installed a small twitter command-line utility with `pip2 install twitter`. Ri
 All the twitter scripts should run normally from now on.
 
 ### Admin scripts
-Subfolders of `~/.local/scripts/` store scripts that should only be executed with admin privileges.
-Their ownership have to be set to root with `sudo chown root:root SCRIPT`. You should also make sure that they are executable with `sudo chmod +x SCRIPT`.
+Subfolders of `/usr/local/sbin/scripts/` store scripts that should only be executed with admin privileges.
+Their ownership should be set to root (`sudo chown root:root -R /usr/local/sbin/scripts/`).
+You should also make sure that they are executable with `sudo chmod +x /usr/local/sbin/scripts/ -R`.
 
 Scripts in the `internet` subfolder manage, well, internet connections.
 You should change the `enp3s0` and `wlp2s0` to whatever your ethernet and wifi interfaces' names are (you can get them with `ip link`).
@@ -112,12 +118,15 @@ Also included is a WiFi script that use the `/etc/wpa_supplicant/wifi_example.co
 By default, you can choose to launch one of these internet scripts by hitting the `Super+Shift+N` keys in i3.
 
 The `powerplans` subfolder holds scripts that change the computer speeds to maximize either performance or battery life. They are specific to Intel computers and you ideally shouldn't have
-to use them unless your computer has temperature or battery issues.
+to use them unless your computer has temperature or battery issues. They're tied to the `Super+Shift+X` keys in i3.
 
 I run the `maintenance` scripts roughly one time per month, to free up space on my home partition.
 They'll only be useful if you use [BTRFS](https://btrfs.wiki.kernel.org) on your home partition.
 If you have BTRFS installed I'd assume you know what you are doing and should be able to correctly modify these scripts to suit your needs anyway.
 The `deduplication` script depends on [duperemove](https://github.com/markfasheh/duperemove).
+
+Scripts in the `i3` folder are launched from i3 shortcuts and will ask for your password when executed.
+I put them in here to make sure that they can't be modified to launch any other script with admin privileges.
 
 ### Theme
 Themes are automatically generated from your wallpaper with the `~/.config/i3/scripts/theme` script.
