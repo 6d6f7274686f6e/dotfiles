@@ -117,10 +117,7 @@ There's also some screen setup in there that most likely won't work on your syst
 There are various utility scripts under `~/.config/i3/scripts/`, and `i3blocks` (the i3 status bar) relies on those in `~/.config/i3/scripts/i3blocks/`. You should also read them
 to learn about the various things that can be done by clicking on the status bar.
 
-Some of the scripts that can be launched through shortcuts may ask for your password to launch other scripts with admin privileges. If you want to really be sure that one of these shortcut doesn't
-launch an unwanted malicious script with admin privileges, you can change the `config` ownership to `root` with `sudo chown root:root ~/.config/i3/config/` to make sure it won't be modified
-without you knowing, and you should be fine (or simply never use a script that requires admin privileges through the GUI at all). I understand that it is a bit of a cheap trick but I haven't found
-any better way to keep my admin-privilege-requesting shortcuts without risks.
+Some of the scripts that can be launched through shortcuts may ask for your password to launch other scripts with admin privileges. This is a bit of a tradeoff between comfort and security, since theoretically someone could change those shortcuts to prompt your password and then run unwanted programs as root. So far I haven't found any way to prevent this, so you can disable those shortcuts if you want to be really sure.
 
 ### ZSH
 Set ZSH as your default shell by typing `chsh -s /bin/zsh`.
@@ -184,3 +181,6 @@ The script can be called in [ranger](https://ranger.github.io) with the `bg` sho
 
 By default, it will also generate a GTK theme. To activate this theme, run `lxappearance`, choose the `oomox-autotheme` theme in the list on the left, and click `Apply` then `Close`.
 You won't need to do this anymore after that, even if you change your wallpaper and theme. You can even delete the `.icons` folder and `.gtkrc-x.x` file it created in your home folder without consequences.
+
+# Attack surface
+* modifying the PATH variable

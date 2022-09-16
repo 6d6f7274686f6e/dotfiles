@@ -2,16 +2,17 @@ set nocompatible
 filetype off
 set rtp+=~/.config/nvim/bundle/Vundle.vim
 
+call vundle#rc("~/.config/nvim/bundle/")
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Shougo/deoplete.nvim'               " auto completion
+" Plugin 'Shougo/deoplete.nvim'               " auto completion
 Plugin 'junegunn/goyo.vim'                  " calm mode
 Plugin 'junegunn/limelight.vim'             " highlight current paragraph only
 Plugin 'rstacruz/sparkup'                   " HTML speedup with ;e
 Plugin 'vim-airline/vim-airline'            " vim statusbar
 Plugin 'vim-airline/vim-airline-themes'     " vim statusbar themes
-Plugin 'enomsg/vim-haskellConcealPlus'      " unicode for haskell operators
+" Plugin 'enomsg/vim-haskellConcealPlus'      " unicode for haskell operators
 Plugin 'easymotion/vim-easymotion'          " fast movement with `f` in normal mode
 Plugin 'tpope/vim-surround'                 " operations on parentheses, brackets, etc
 Plugin 'scrooloose/nerdtree'                " Folder explorer
@@ -21,8 +22,9 @@ Plugin 'yogsototh/haskell-vim'              " syntax indentation / highlight
 Plugin 'eagletmt/neco-ghc'                  " Haskell completion plugin
 " Plugin 'Twinside/vim-hoogle'                " use hoogle in vim
 Plugin 'tidalcycles/vim-tidal'              " tidal : music patterns in haskell
-
+Plugin 'chrisbra/Colorizer'                 " preview colors in code
 Plugin 'dylanaraps/wal.vim'
+Plugin 'jlapolla/vim-coq-plugin'            " Coq highlighting
 
 call vundle#end()
 filetype plugin on
@@ -52,10 +54,10 @@ set wrap
 set linebreak
 syntax on
   
-" if (exists('+colorcolumn'))
-"     set colorcolumn=120
-"     highlight ColorColumn ctermbg=9
-" endif
+if (exists('+colorcolumn'))
+    set colorcolumn=120
+    highlight ColorColumn ctermbg=9
+endif
 
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
@@ -115,18 +117,18 @@ nnoremap <C-l> :tabnext<CR>
 nnoremap <C-h> :tabprevious<CR>
 nnoremap <C-n> :tabnew<CR>
 nnoremap <C-q> :q<CR>
-inoremap <C-l> :tabnext<CR>
-inoremap <C-h> :tabprevious<CR>
-inoremap <C-n> :tabnew<CR>
-inoremap <C-q> :q<CR>
+" inoremap <C-l> :tabnext<CR>
+" inoremap <C-h> :tabprevious<CR>
+" inoremap <C-n> :tabnew<CR>
+" inoremap <C-q> :q<CR>
 
 " Buffers Management
 nnoremap <A-l> :bnext<CR>
 nnoremap <A-h> :bprevious<CR>
 nnoremap <A-q> :bdelete<CR>
-inoremap <A-l> :bnext<CR>
-inoremap <A-h> :bprevious<CR>
-inoremap <A-q> :bdelete<CR>
+" inoremap <A-l> :bnext<CR>
+" inoremap <A-h> :bprevious<CR>
+" inoremap <A-q> :bdelete<CR>
 
 " Additional shortcuts
 
@@ -152,30 +154,18 @@ autocmd Filetype c nnoremap ;c :w<Enter>:!gcc "%" -o program<Enter><Enter>
 " -------------------
 "       Haskell
 " -------------------
-let mapleader="-"
-let g:mapleader="-"
-let hscoptions="𝐓𝐒𝐄𝐌""
-" let hscoptions="SMETfcCRla𝐓𝐒𝐄𝐌"
-set tm=2000
-" nmap <silent> <leader>ht :GhcModType<CR>
-" nmap <silent> <leader>hh :GhcModTypeClear<CR>
-" nmap <silent> <leader>hT :GhcModTypeInsert<CR>
-" nmap <silent> <leader>hc :SyntasticCheck ghc_mod<CR>:lopen<CR>
-let g:syntastic_mode_map={'mode': 'active', 'passive_filetypes': ['haskell']}
-let g:syntastic_always_populate_loc_list = 1
-nmap <silent> <leader>hl :SyntasticCheck hlint<CR>:lopen<CR>
-
-" Auto-checking on writing
-" autocmd BufWritePost *.hs,*.lhs GhcModCheckAndLintAsync
-
 "  neocomplcache (advanced completion)
 autocmd BufEnter *.hs,*.lhs let g:neocomplcache_enable_at_startup = 1
 function! SetToCabalBuild()
-    if glob("*.cabal") != ''
-        set makeprg=cabal\ build
-    endif
+  if glob("*.cabal") != ''
+    set makeprg=cabal\ build
+  endif
 endfunction
 autocmd BufEnter *.hs,*.lhs :call SetToCabalBuild()
 
 " -- neco-ghc
 let $PATH=$PATH.':'.expand("~/.cabal/bin")
+
+" colorizer
+let g:colorizer_auto_color = 1
+let g:colorizer_colornames = 0

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+source $XDG_CACHE_HOME/wal/colors.sh
+
+sleep 1
+
+[ $(echo -e "No\nYes" | rofi -dmenu -i -p "$1" -1 -lines 2 -hide-scrollbar -font "Whatever 18" \
+  -color-window "$color0,$color7,$color5" \
+  -color-normal "$color0,$color7,$color0,$color1,$color0" \
+  ) == "Yes" ] && exit 0
+exit 1

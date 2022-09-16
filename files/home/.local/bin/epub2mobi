@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for i in "$@"
+do
+  kindlegen "$i" 2>/dev/null \
+    | grep -i -E "dc:creator|dc:title|warning|Mobi file built|^error" \
+    | grep -iv -E "prc built|CSS|too small|pagemap|forcefully|overlapping"
+done

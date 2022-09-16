@@ -1,0 +1,56 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import re
+import sys
+import os
+import getopt
+
+from pathlib import Path
+
+def main(argv):
+    errors = ""
+    for s in argv:
+        if os.path.isfile(s):
+            name = Path(s).stem
+            print("Getting metadata from filename:")
+            print("  Filename: " + s)
+            m = re.match("(?P<author>[^_-]+) -?\s*(?P<series>[^_0-9-]*)(?P<series_index>[0-9]*)\s*-\s*(?P<title>[^_].+) ?", name)
+            try: 
+                d = m.groupdict()
+                authors      = d.get('author',"").strip()
+                title        = d.get('title',"").strip()
+                series       = d.get('series',"").strip()
+                series_index = d.get('series_index',"").strip()
+                print("  Authors:  " + authors)
+                print("  Series:   " + series)
+                print("  Index:    " + series_index)
+                print("  Title:    " + title)
+                command = "ebook-meta \"" + s + "\""
+                if title:
+                    command += " -t \"" + title + "\""
+                if authors:
+                    command += " -a \"" + authors + "\""
+                if series:
+                    command += " -s \"" + series + "\""
+                if series_index:
+                    command += " -i \"" + series_index + "\""
+                print("Command: " + command)
+                command += " > /dev/null 2>&1"
+                answer = ""
+                #answer = input("Perform changes? (default: Yes) ")
+                if answer.upper() in ["Y", "YES", ""]:
+                    os.system(command)
+                else:
+                    print("OK, Skipping")
+            except:
+                print("Error getting metadata. Skipping...")
+                errors += s
+                errors += "\n  "
+            print("----------------")
+    print("Done.")
+    if errors:
+        print("Files untouched:")
+        print(errors)
+
+if __name__ == "__main__":
+   main(sys.argv[1:])

@@ -1,8 +1,0 @@
-#!/bin/zsh
-
-[ $(pgrep check_internet | wc -l) -gt 2 ] && notify-send "Internet" "Script is already running" -u low -t 5000 && exit
-
-notify-send -u low "Internet" "Started checking connection..." -t 5000
-while true; do 
-  ping -q -w 72000 -c 1 8.8.8.8 && notify-send "Internet" "Connection is up and running!" -t 5000 && exit
-done

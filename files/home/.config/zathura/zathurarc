@@ -1,8 +1,38 @@
-set page-padding 0
-set default-bg "#1D3D56"
-set default-fg "#DBD4A7"
-set statusbar-bg "#709689"
-set statusbar-fg "#DBD4A7"
-set recolor-keephue "false"
-set recolor-lightcolor "#1D3D56"
-set recolor-darkcolor "#DBD4A7"
+set page-padding 2
+
+set font "monospace normal 9"
+
+set default-bg "#2E3440"
+set default-fg "#ECEFF4"
+
+set inputbar-bg "#2E3440"
+set inputbar-fg "#ECEFF4"
+
+set notification-bg "#2E3440"
+set notification-fg "#ECEFF4"
+
+set notification-error-bg "#ECEFF4"
+set notification-error-fg "#2E3440"
+
+set notification-warning-bg "#88C0D0"
+set notification-warning-fg "#2E3440"
+
+set statusbar-bg "#88C0D0"
+set statusbar-fg "#2E3440"
+
+set highlight-color "#88C0D0"
+set highlight-fg "#88C0D0"
+set highlight-active-color "#E5E9F0"
+
+set index-bg "#2E3440"
+set index-fg "#ECEFF4"
+set index-active-bg "#88C0D0"
+set index-active-fg "#2E3440"
+
+set recolor-keephue "true"
+set recolor-lightcolor "#2E3440"
+set recolor-darkcolor "#ECEFF4"
+set recolor-reverse-video "true"
+# set recolor "true"
+
+set guioptions none

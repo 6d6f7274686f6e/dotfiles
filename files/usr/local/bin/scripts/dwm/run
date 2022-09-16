@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+source $XDG_CACHE_HOME/wal/colors.sh
+
+rofi -modi run,window -show run -lines 6 -1 -eh 2 -hide-scrollbar -font "Whatever 18" \
+  -color-window "$color0,$color7,$color5" \
+  -color-normal "$color0,$color7,$color0,$color1,$color0" \
+
