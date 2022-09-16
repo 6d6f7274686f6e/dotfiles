@@ -10,4 +10,5 @@ dwmblocks &
 xcompmgr -f -D5 &
 killall -9 dunst
 dunst &
+numlockx
 dwm
