@@ -1,8 +1,38 @@
-set page-padding 0
+set page-padding 2
+
+set font "monospace normal 9"
+
 set default-bg "color0"
 set default-fg "color7"
+
+set inputbar-bg "color0"
+set inputbar-fg "color7"
+
+set notification-bg "color0"
+set notification-fg "color7"
+
+set notification-error-bg "color7"
+set notification-error-fg "color0"
+
+set notification-warning-bg "color4"
+set notification-warning-fg "color0"
+
 set statusbar-bg "color4"
-set statusbar-fg "color7"
-set recolor-keephue "false"
+set statusbar-fg "color0"
+
+set highlight-color "color4"
+set highlight-fg "color4"
+set highlight-active-color "color6"
+
+set index-bg "color0"
+set index-fg "color7"
+set index-active-bg "color4"
+set index-active-fg "color0"
+
+set recolor-keephue "true"
 set recolor-lightcolor "color0"
 set recolor-darkcolor "color7"
+set recolor-reverse-video "true"
+# set recolor "true"
+
+set guioptions none

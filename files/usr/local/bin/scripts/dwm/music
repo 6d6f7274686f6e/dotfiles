@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+case $MUSIC_COMMAND in
+  toggle) mpc toggle > /dev/null ; kill -45 $(pidof dwmblocks) > /dev/null ;;
+  stop)   mpc stop   > /dev/null ; kill -45 $(pidof dwmblocks) > /dev/null ;;
+  prev)   mpc prev   > /dev/null ; kill -45 $(pidof dwmblocks) > /dev/null ;;
+  next)   mpc next   > /dev/null ; kill -45 $(pidof dwmblocks) > /dev/null ;;
+  volinc) mpc volume +2 > /dev/null ;;
+  voldec) mpc volume -2 > /dev/null ;;
+esac

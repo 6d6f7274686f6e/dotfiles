@@ -1,0 +1,17 @@
+#!/bin/sh
+
+source $XDG_CACHE_HOME/wal/colors.sh
+
+answer=$(echo -e "Exit dwm\nSuspend\nReboot\nShutdown" | rofi \
+-dmenu -i -p "Shutdown options" -lines 4 -hide-scrollbar -font "Whatever 18" \
+-color-window "$color0,$color7,$color5" \
+-color-normal "$color0,$color7,$color0,$color1,$color0")
+
+[ -z "$answer" ] && exit
+
+case "$answer" in
+  "Exit dwm") killall dwm ;;
+  "Suspend")  $DWMSCRIPTS/lock               & systemctl suspend ;;
+  "Reboot")   $DWMSCRIPTS/prompt "Reboot"   && systemctl reboot ;;
+  "Shutdown") $DWMSCRIPTS/prompt "Shutdown" && systemctl poweroff ;;
+esac

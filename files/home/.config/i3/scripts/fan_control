@@ -1,9 +1,0 @@
-#!/bin/bash
-
-source $XDG_CACHE_HOME/wal/colors.sh
-
-statut=$(nbfc status 2>/dev/null | grep "Service enabled" | awk '{if ($4=="True") print "enabled"; else print "disabled"}')
-prompt=$(echo -e "Start NBFC\nStop NBFC" | rofi -dmenu -i -p "NBFC $statut" -lines 2 -hide-scrollbar -font "Whatever 18" -color-window "$color0,$color7,$color1")
-
-[ "$prompt" == "Start NBFC" ] && nbfc start
-[ "$prompt" == "Stop NBFC" ] && nbfc stop

@@ -1,0 +1,17 @@
+#!/bin/zsh
+
+source $XDG_CACHE_HOME/wal/colors.sh
+source /usr/local/share/adminvars
+
+n=$(/usr/bin/ls $ADMINSCRIPTS/powerplans | wc -l)
+[ $n -gt 5 ] && n=5
+
+answer=$(/usr/bin/ls $ADMINSCRIPTS/powerplans/ | /usr/bin/rofi -dmenu -i -p "Use powerplan" -lines $n \
+  -hide-scrollbar -font "Whatever 18" -color-window "$color0,$color7,$color5" \
+  -color-normal "$color0,$color7,$color0,$color1,$color0")
+
+[ -z "$answer" ] \
+  || (/usr/bin/zenity --password --text "Applying powerplan: $answer" | /usr/bin/sudo -S "$ADMINSCRIPTS/powerplans/$answer" 2>/dev/null) \
+  || /usr/bin/notify-send -u low "sudo" "Wrong Password"
+
+exit

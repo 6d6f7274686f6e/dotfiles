@@ -1,0 +1,25 @@
+#!/bin/zsh
+
+case $BLOCK_BUTTON in
+  1) MUSIC_COMMAND=toggle /usr/local/bin/scripts/dwm/music ;;
+  2) MUSIC_COMMAND=prev   /usr/local/bin/scripts/dwm/music ;;
+  3) MUSIC_COMMAND=next   /usr/local/bin/scripts/dwm/music ;;
+  4) MUSIC_COMMAND=volinc /usr/local/bin/scripts/dwm/music ;;
+  5) MUSIC_COMMAND=voldec /usr/local/bin/scripts/dwm/music ;;
+esac
+
+for i in $(mpc --format ""); do
+    a=$i
+    break
+done
+
+current=`mpc current | tr -d '\n\r'`
+[ -z "$current" ] && return 1
+
+if [ $a = "[playing]" ] ; then
+  echo -ne "  "
+elif [ $a = "[paused]" ] ; then
+  echo -ne "  "
+fi
+
+echo -ne "${current:0:70}"

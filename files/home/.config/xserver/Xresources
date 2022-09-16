@@ -1,13 +1,17 @@
 Xft.dpi: 96
 URxvt.scrollBar:      false
-*.font:               \
-                      xft:Inconsolata Nerd Font Mono:size=13,\
-                      xft:Liberation Mono for Powerline:size=12,\
-                      xft:Kochi Gothic:antialias=true,\
-                      xft:HanaMinB,\
-                      xft:HanaMinA,\
-                      xft:Baekmuk Gulin:antialias=true,\
-                      xft:Noto Sans Devanagari
+*.font: \
+  xft:Literation Mono Nerd Font:size=11,\
+  xft:Liberation Mono for Powerline:size=11,\
+  xft:Inconsolata Nerd Font Mono:size=11,\
+  xft:Baekmuk Gulin:antialias=true,\
+  xft:Noto Sans Devanagari,\
+  xft:Kochi Gothic:antialias=true,\
+  xft:HanaMinB,\
+  xft:HanaMinA,\
+
+*.borderpx: 0
+
 ! URxvt.letterSpace:    +1
 URxvt.url-launcher:   handlelink
 URxvt*loginShell:     true
@@ -20,8 +24,12 @@ URxvt.secondaryScroll: 0
 
 URxvt.perl-ext-common: default,matcher,resize-font
 URxvt.matcher.button: 1
-URxvt.resize-font.smaller:	C-j
-URxvt.resize-font.bigger:	C-k
+URxvt.keysym.C-KP_Subtract: resize-font:smaller
+URxvt.keysym.C-KP_Add:      resize-font:bigger
+URxvt.keysym.C-KP_Multiply: resize-font:reset
+URxvt.keysym.C-KP_Divide:   resize-font:show
+URxvt.keysym.C-J: resize-font:smaller
+URxvt.keysym.C-K: resize-font:bigger
 URxvt.iso14755: False
 URxvt.keysym.Shift-Control-C: perl:clipboard:copy
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
@@ -37,39 +45,41 @@ rofi.font: DejaVu Sans 22
 
 URxvt.depth:            32
 
-*background:            [85]#151515
-*foreground:            #878787
-*fadeColor:             #000000
-*cursorColor:           #adadad
+*background:  #151515
+*foreground:  #878787
+*fadeColor:   #000000
+*cursorColor: #adadad
 
 !! black dark/light
-*color8:                #3b3b3b
-*color0:                #151515
+*color8:      #3b3b3b
+*color0:      #151515
 
 !! red dark/light
-*color9:                #6f6a4c
-*color1:                #a94426
+*color9:      #6f6a4c
+*color1:      #a94426
 
 !! green dark/light
-*color10:                #99ad6a
-*color2:               #738744
+*color10:     #99ad6a
+*color2:      #738744
 
 !! yellow dark/light
-*color11:                #d8ad4c
-*color3:               #b28726
+*color11:     #d8ad4c
+*color3:      #b28726
 
 !! blue dark/light
-*color12:                #597bc5
-*color4:               #33559f
+*color12:     #597bc5
+*color4:      #33559f
 
 !! magenta dark/light
-*color13:                #a037b0
-*color5:               #7a1189
+*color13:     #a037b0
+*color5:      #7a1189
 
 !! cyan dark/light
-*color14:                #71b9f8
-*color6:               #4b93d3
+*color14:     #71b9f8
+*color6:      #4b93d3
 
 !! white dark/light
-*color15:                #adadad
-*color7:               #878787
+*color15:     #adadad
+*color7:      #878787
+
+#include "wal/colors.xresources"

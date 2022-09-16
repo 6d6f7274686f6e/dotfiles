@@ -1,4 +1,3 @@
-# Change enp3s0 to your ethernet interface name
 sudo ip link set enp3s0 up
 sudo killall -9 dhcpcd
 sudo dhcpcd -n enp3s0

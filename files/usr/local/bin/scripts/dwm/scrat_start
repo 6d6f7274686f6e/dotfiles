@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+/usr/local/bin/scripts/dwm/prompt "Start screencast" || {
+  notify-send -u low "Screencast" "Recording cancelled."
+  exit
+}
+
+notify-send -u low "Screencast" "Recording started."
+ffmpeg -f x11grab -video_size 1920x1080 -framerate 30 -i :0 -f alsa \
+  -i default -c:v libx264rgb -preset ultrafast -c:a aac "$HOME/Media/Videos/Screencasts/$(date +%Y%m%d-%H%M%S).mkv"
+notify-send -u low "Screencast" "Recording stopped."

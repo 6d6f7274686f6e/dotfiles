@@ -1,0 +1,18 @@
+#!/bin/bash
+
+source $XDG_CACHE_HOME/wal/colors.sh
+
+unmountable=$(lsblk -lp -o NAME,LABEL,TYPE,MOUNTPOINT | grep -e disk -e rom -e "part $" -e SWAP -e NAME -e "/dev/sdb" -v | awk '{print $1, "(" $2 ")"}')
+[[ "$unmountable" = "" ]] && notify-send -u critical "Auto-Mount" "No mounted drive detected." && exit
+lines=$(echo "$unmountable" | wc -l)
+chosen=$(echo "$unmountable" \
+  | rofi -dmenu -i -p "Mounted drives" -1 -lines $lines \
+    -font 'Whatever 18' -color-window "$color0,$color7,$color5" -hide-scrollbar \
+    -color-normal "$color0,$color7,$color0,$color1,$color0" \
+  | awk '{print $1}')
+[[ "$chosen" = "" ]] && exit
+
+answer=$(udisksctl unmount -b "$chosen")
+
+[[ "$answer" = "" ]] && notify-send -u critical "Auto-Mount" "Could not unmount $chosen." && exit
+notify-send -u normal "Auto-Mount" "$answer"

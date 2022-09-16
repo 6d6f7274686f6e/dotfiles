@@ -1,0 +1,78 @@
+#!/bin/zsh
+
+opacity=100
+img_file=
+
+for i in $@ ; do
+  [ "$i" = "transparent" ] && opacity=90
+  [ "$i" = "normal" ] && opacity=99
+  [ "$i" != "transparent" ] && [ "$i" != "normal" ] && img_file="$i"
+done
+
+if [ -n "$img_file" ]; then 
+  [ $opacity -lt 100 ] && wal -i $img_file -a $opacity 
+  [ $opacity -lt 100 ] || wal -i $img_file
+else
+  [ $opacity -lt 100 ] && wal -f $XDG_CACHE_HOME/wal/colors -a $opacity
+  [ $opacity -lt 100 ] || wal -f $XDG_CACHE_HOME/wal/colors
+fi
+
+xrdb -I$XDG_CACHE_HOME $XDG_CONFIG_HOME/xserver/Xresources
+
+~/.fehbg
+
+source "$XDG_CACHE_HOME/wal/colors.sh"
+
+background=${color0:1}
+foreground=${color7:1}
+txt_background=${color0:1}
+txt_foreground=${color7:1}
+menu_background=${color0:1}
+menu_foreground=${color4:1}
+sel_background=${color0:1}
+sel_foreground=${color4:1}
+btn_background=${color0:1}
+btn_foreground=${color7:1}
+
+oomoxconf="/tmp/autotheme"
+
+cat << HEREDOC > $oomoxconf
+NAME="autotheme"
+BG=$background
+FG=$foreground
+TXT_BG=$txt_background
+TXT_FG=$txt_foreground
+MENU_BG=$menu_background
+MENU_FG=$menu_foreground
+SEL_BG=$sel_foreground
+SEL_FG=$sel_background
+BTN_BG=$btn_background
+BTN_FG=$btn_foreground
+HEREDOC
+
+# someone apparently thought that making this program go apeshit on april fools day was a very good and funny idea.
+no_jokes="kys" oomox-cli $oomoxconf -t $XDG_DATA_HOME/themes
+
+tmpbgbak="$XDG_CONFIG_HOME/xlock/screen.png"
+tmpbg="$(cut -d\' -f2 ~/.fehbg | sed -n 2p)"
+export MAGICK_OCL_DEVICE=OFF
+
+echo Updating zathura config files...
+$XDG_CONFIG_HOME/zathura/.rcgen > $XDG_CONFIG_HOME/zathura/zathurarc
+echo Done.
+echo Updating dunst config files...
+$XDG_CONFIG_HOME/dunst/.rcgen > $XDG_CONFIG_HOME/dunst/dunstrc
+echo Restarting dunst...
+pgrep dunst && killall dunst
+eval $(dbus-launch)
+echo Done.
+echo Lock screen
+cp "$tmpbg" "$tmpbgbak"
+echo Resizing and croping...
+convert "$tmpbgbak" -resize 1920x1080^ -gravity center -extent 1920x1080 "$tmpbgbak" 
+echo Bluring...
+convert "$tmpbgbak" -blur 0x6 "$tmpbgbak"
+echo Done.
+echo Restarting ibus...
+ibus-daemon -drx --panel /usr/lib/ibus/ibus-ui-gtk3
+echo Done.
