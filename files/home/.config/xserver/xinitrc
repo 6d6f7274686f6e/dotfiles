@@ -3,12 +3,21 @@ export __GL_SHADER_DISK_CACHE_PATH=~/.cache/nv/
 export ERRFILE=~/.config/xserver/xsessions-errors
 export DWMSCRIPTS=/usr/local/bin/scripts/dwm
 #export XAUTHORITY=~/.config/xserver/Xauthority
+
+xrandr --dpi 96
 setxkbmap fr
-~/.fehbg
+~/.fehbg &
 xrdb -I$XDG_CACHE_HOME $XDG_CONFIG_HOME/xserver/Xresources
 dwmblocks &
 xcompmgr -f -D5 &
 killall -9 dunst
 dunst &
-numlockx
+pgrep pulseaudio || pulseaudio --daemonize
+pgrep mpd$ || mpd &
+pgrep mpdscribble || mpdscribble &
+pgrep mpdiscord || mpdiscord &
+ibus-daemon -drx --panel /usr/lib/ibus/ibus-ui-gtk3
+yams -k
+yams &
+numlockx on
 dwm
