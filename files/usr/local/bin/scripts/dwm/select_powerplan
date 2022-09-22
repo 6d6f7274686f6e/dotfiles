@@ -12,5 +12,5 @@ answer=$(/usr/bin/ls $ADMINSCRIPTS/powerplans/ | /usr/bin/rofi -dmenu -i -p "Use
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 sleep 1
-[ -z "$answer" ] || /usr/bin/pkexec /usr/bin/sudo -S "$ADMINSCRIPTS/powerplans/$answer"
+[ -z "$answer" ] || /usr/bin/pkexec $ADMINSCRIPTS/powerplans/$answer
 kill -9 $(pgrep polkit-gnome)

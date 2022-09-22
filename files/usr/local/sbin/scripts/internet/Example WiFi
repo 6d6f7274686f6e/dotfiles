@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # change wlp2s0 to your WiFi interface
 sudo ip link set wlp2s0 up
 sudo killall -9 wpa_supplicant dhcpcd

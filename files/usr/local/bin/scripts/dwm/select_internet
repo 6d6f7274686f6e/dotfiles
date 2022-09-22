@@ -12,5 +12,5 @@ answer=$(/usr/bin/ls $ADMINSCRIPTS/internet/ | /usr/bin/rofi -dmenu -i -p "Use I
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 sleep 1
-[ -z "$answer" ] || /usr/bin/pkexec /usr/bin/sudo -S "$ADMINSCRIPTS/internet/$answer" $USER
+[ -z "$answer" ] || /usr/bin/pkexec $ADMINSCRIPTS/internet/$answer $USER
 kill -9 $(pgrep polkit-gnome)
