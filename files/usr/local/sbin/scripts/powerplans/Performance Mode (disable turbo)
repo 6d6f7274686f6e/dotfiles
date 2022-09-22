@@ -1,3 +1,5 @@
+#!/bin/sh
+
 sudo intel-undervolt apply
 sudo x86_energy_perf_policy performance
 sudo cpupower-gui energy --pref performance
