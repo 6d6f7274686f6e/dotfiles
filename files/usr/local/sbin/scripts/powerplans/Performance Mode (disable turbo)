@@ -1,7 +1,7 @@
 #!/bin/sh
 
-sudo intel-undervolt apply
-sudo x86_energy_perf_policy performance
-sudo cpupower-gui energy --pref performance
-sudo x86_energy_perf_policy --turbo-enable 0
-sudo cpupower frequency-set -g performance
+intel-undervolt apply
+x86_energy_perf_policy performance
+cpupower-gui energy --pref performance
+x86_energy_perf_policy --turbo-enable 0
+cpupower frequency-set -g performance

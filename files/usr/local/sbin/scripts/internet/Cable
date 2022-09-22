@@ -1,6 +1,6 @@
 #!/bin/sh
 
 # change enp3s0 to your own interface
-sudo ip link set enp3s0 up
-sudo killall -9 dhcpcd
-sudo dhcpcd -n enp3s0
+ip link set enp3s0 up
+killall -9 dhcpcd
+dhcpcd -n enp3s0
