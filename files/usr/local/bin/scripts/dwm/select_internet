@@ -10,6 +10,7 @@ answer=$(/usr/bin/ls $ADMINSCRIPTS/internet/ | /usr/bin/rofi -dmenu -i -p "Use I
   -hide-scrollbar -font "Whatever 18" -color-window "$color0,$color7,$color5" \
   -color-normal "$color0,$color7,$color0,$color1,$color0")
 
-[ -z "$answer" ] \
-  || (/usr/bin/zenity --password --text "Connect to $answer" | /usr/bin/sudo -S "$ADMINSCRIPTS/internet/$answer" 2>/dev/null) \
-  || /usr/bin/notify-send -u low "sudo" "Wrong Password"
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+sleep 1
+[ -z "$answer" ] || /usr/bin/pkexec /usr/bin/sudo -S "$ADMINSCRIPTS/internet/$answer" $USER
+kill -9 $(pgrep polkit-gnome)
