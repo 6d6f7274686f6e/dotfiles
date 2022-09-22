@@ -9,8 +9,23 @@ answer=$(echo -e "Exit dwm\nSuspend\nReboot\nShutdown" | rofi \
 
 [ -z "$answer" ] && exit
 
+# find dwm pid
+dwmpid=$$
+notdwm=
+while [ -z $notdwm ] 
+do
+  dwmpid=$(ps j $dwmpid | awk '{print $1}' | tail -n 1)
+  for i in $(pgrep ^dwm$) 
+  do
+    if [ "$dwmpid" -eq "$i" ] 
+    then
+      notdwm=false
+    fi
+  done
+done
+
 case "$answer" in
-  "Exit dwm") killall dwm ;;
+  "Exit dwm") kill -9 $dwmpid ;;
   "Suspend")  $DWMSCRIPTS/lock               & systemctl suspend ;;
   "Reboot")   $DWMSCRIPTS/prompt "Reboot"   && systemctl reboot ;;
   "Shutdown") $DWMSCRIPTS/prompt "Shutdown" && systemctl poweroff ;;
