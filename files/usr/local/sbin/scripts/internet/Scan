@@ -1,8 +1,14 @@
 sudo ip link set wlp2s0 up 
 
-answer=$(sudo iw dev wlp2s0 scan | grep SSID | cut -d':' -f 2)
-display=":$(ls /tmp/.X11-unix/* | sed 's#/tmp/.X11-unix/X##' | head -n 1)"
-user=$(who | grep '('$display')' | awk '{print $1}' | head -n 1)
+answer=$(sudo iw dev wlp2s0 scan | grep SSID | cut -d':' -f 2 | sort | uniq)
+displays=":$(ls /tmp/.X11-unix/* | sed 's#/tmp/.X11-unix/X##' | sort | uniq)"
+
+user=$1
 uid=$(id -u $user)
 
-sudo -u $user DISPLAY=$display DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus notify-send -u low "WiFi Networks" "$answer"
+for display in $displays
+do
+    sudo -u $user DISPLAY=$display DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus notify-send -u low "WiFi Networks" "$answer" &
+done
+killall -9 notify-send 2> /dev/null
+exit 0
