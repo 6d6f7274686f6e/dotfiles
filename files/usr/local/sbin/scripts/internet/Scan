@@ -1,8 +1,8 @@
 #!/bin/sh
 
-sudo ip link set wlp2s0 up 
+ip link set wlp2s0 up 
 
-answer=$(sudo iw dev wlp2s0 scan | grep SSID | cut -d':' -f 2 | sort | uniq)
+answer=$(iw dev wlp2s0 scan | grep SSID | cut -d':' -f 2 | sort | uniq)
 displays=":$(ls /tmp/.X11-unix/* | sed 's#/tmp/.X11-unix/X##' | sort | uniq)"
 
 user=$1
