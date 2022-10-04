@@ -2,9 +2,18 @@
 
 source $XDG_CACHE_HOME/wal/colors.sh
 
-notify-send -u low "Fan Control" "Getting NBFC status..."
-statut=$(nbfc status 2>/dev/null | grep "Service enabled" | awk '{if ($4=="True") print "enabled"; else print "disabled"}')
-prompt=$(echo -e "Start NBFC\nStop NBFC" | rofi -dmenu -i -p "NBFC $statut" -1 -lines 2 -hide-scrollbar -font "Whatever 18" -color-window "$color0,$color7,$color5" -color-normal "$color0,$color7,$color0,$color1,$color0")
+pgrep dunst >/dev/null || dunst &!
 
-[ "$prompt" == "Start NBFC" ] && nbfc start && notify-send -u low "Fan Control" "NBFC started."
-[ "$prompt" == "Stop NBFC" ] && nbfc stop && notify-send -u low "Fan Control" "NBFC stopped."
+notify-send -u low "Fan Control" "Getting NBFC status..."
+statut=$((nbfc status -a 2>/dev/null | grep "Service not running" >/dev/null && echo "disabled") || echo "enabled")
+prompt=$(echo -e "Start NBFC\nRestart NBFC\nStop NBFC" | rofi -dmenu -i -p "NBFC $statut" -1 -lines 3 -hide-scrollbar -font "Whatever 18" \
+	-color-window "$color0,$color7,$color4" -color-normal "$color0,$color7,$color0,$color4,$color0")
+
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+sleep 1
+
+[ "$prompt" == "Start NBFC" ]   && pkexec nbfc start   && notify-send -u low "Fan Control" "NBFC started."
+[ "$prompt" == "Restart NBFC" ] && pkexec nbfc restart && notify-send -u low "Fan Control" "NBFC restarted."
+[ "$prompt" == "Stop NBFC" ]    && pkexec nbfc stop    && notify-send -u low "Fan Control" "NBFC stopped."
+
+kill -9 $(pgrep polkit-gnome)

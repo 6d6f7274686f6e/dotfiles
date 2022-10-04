@@ -7,8 +7,8 @@ unmountable=$(lsblk -lp -o NAME,LABEL,TYPE,MOUNTPOINT | grep -e disk -e rom -e "
 lines=$(echo "$unmountable" | wc -l)
 chosen=$(echo "$unmountable" \
   | rofi -dmenu -i -p "Mounted drives" -1 -lines $lines \
-    -font 'Whatever 18' -color-window "$color0,$color7,$color5" -hide-scrollbar \
-    -color-normal "$color0,$color7,$color0,$color1,$color0" \
+    -font 'Whatever 18' -color-window "$color0,$color7,$color4" -hide-scrollbar \
+    -color-normal "$color0,$color7,$color0,$color4,$color0" \
   | awk '{print $1}')
 [[ "$chosen" = "" ]] && exit
 

@@ -5,7 +5,7 @@ source $XDG_CACHE_HOME/wal/colors.sh
 link="$1"
 
 handler=$(echo -e "firefox\nsurf\nchromium\nmpv" | rofi -dmenu -i -p "Choose a link handler" \
--font "Whatever 18" -1 -lines 3 -hide-scrollbar -color-window "$color0,$color7,$color5" \
--color-normal "$color0,$color7,$color0,$color1,$color0")
+-font "Whatever 18" -1 -lines 3 -hide-scrollbar -color-window "$color0,$color7,$color4" \
+-color-normal "$color0,$color7,$color0,$color4,$color0")
 
 [ "$link" ] && [ "$handler" ] && $handler "$link"
