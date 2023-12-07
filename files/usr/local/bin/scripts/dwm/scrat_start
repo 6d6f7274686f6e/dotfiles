@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+pgrep dunst >/dev/null || dunst &!
+
 /usr/local/bin/scripts/dwm/prompt "Start screencast" || {
   notify-send -u low "Screencast" "Recording cancelled."
   exit

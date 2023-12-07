@@ -2,6 +2,8 @@
 
 source $XDG_CACHE_HOME/wal/colors.sh
 
-i3lock -k -n -i "$XDG_CONFIG_HOME/xlock/screen.png" -c $color1 --indicator --timecolor=${color4}FF --datecolor=${color4}FF \
-  --insidecolor=${color0}FF --linecolor=${color3}FF --ringcolor=${color2}FF --keyhlcolor=${color7}FF --separatorcolor=${color8}FF\
-  --insidevercolor=${color0}FF --ringvercolor=${color2}FF --datestr="%Y-%m-%d" --radius 130 --datesize=25 --timesize=50
+i3lock -k -n -i "$XDG_CONFIG_HOME/xlock/screen.png" -c ${color1}FF --indicator --time-color=${color4}FF\
+  --date-color=${color4}FF  --inside-color=${color0}FF --line-color=${color3}FF --ring-color=${color2}FF\
+  --keyhl-color=${color7}FF --separator-color=${color8}FF --verif-color=${color4}FF\
+  --insidever-color=${color0}FF --ringver-color=${color2}FF --date-str="%Y-%m-%d" --radius 130 --date-size=25\
+  --time-size=50

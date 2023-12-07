@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+pgrep dunst >/dev/null || dunst &!
+
 [ $(pgrep check_internet | wc -l) -gt 2 ] && notify-send "Internet" "Script is already running" -u low -t 5000 && exit
 
 notify-send -u low "Internet" "Started checking connection..." -t 5000

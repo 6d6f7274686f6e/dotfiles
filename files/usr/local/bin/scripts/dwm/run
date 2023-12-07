@@ -5,4 +5,5 @@ source $XDG_CACHE_HOME/wal/colors.sh
 rofi -modi run,window -show run -lines 6 -1 -eh 2 -hide-scrollbar -font "Whatever 18" \
   -color-window "$color0,$color7,$color4" \
   -color-normal "$color0,$color7,$color0,$color4,$color0" \
+  -fixed-num-lines -yoffset 0 \
 
