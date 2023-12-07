@@ -1,0 +1,3 @@
+#!/bin/sh
+
+kill -9 $(xprop | grep PID | cut -d' ' -f3)
