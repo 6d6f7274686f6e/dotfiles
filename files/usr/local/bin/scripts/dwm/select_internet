@@ -3,16 +3,4 @@
 source $XDG_CACHE_HOME/wal/colors.sh
 source /usr/local/share/adminvars
 
-pgrep dunst >/dev/null || dunst &!
-
-n=$(/usr/bin/ls $ADMINSCRIPTS/internet | /usr/bin/wc -l)
-[ $n -gt 5 ] && n=5
-
-answer=$(/usr/bin/ls $ADMINSCRIPTS/internet/ | /usr/bin/rofi -dmenu -i -p "Use Internet script" -lines $n \
-  -hide-scrollbar -font "Whatever 18" -color-window "$color0,$color7,$color4" \
-  -color-normal "$color0,$color7,$color0,$color4,$color0")
-
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-sleep 1
-[ -z "$answer" ] || /usr/bin/pkexec $ADMINSCRIPTS/internet/$answer $USER
-kill -9 $(pgrep polkit-gnome)
+st -e nmtui
