@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -z "$1" ]
+then
+	ani-cli --rofi
+else
+	ani-cli -c --rofi
+fi

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -z "$1" ]
+then
+	lobster --rofi
+else
+	lobster --rofi -c
+fi
