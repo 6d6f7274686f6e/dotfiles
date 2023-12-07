@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# change wlp2s0 to your WiFi interface
-ip link set wlp2s0 up
-killall -9 wpa_supplicant dhcpcd
-wpa_supplicant -B -iwlp2s0 -c/etc/wpa_supplicant/wifi_example.conf
-dhcpcd -n wlp2s0
