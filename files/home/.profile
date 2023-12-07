@@ -27,9 +27,12 @@ export SUDO_EDITOR=nvim
 export EDITOR=nvim
 export WINEARCH=win32
 
+source /usr/local/share/adminvars
+
 if [[ ":$PATH:" != *":"$HOME"/.local/bin:"* ]]; then
   export PATH=$PATH:$HOME/.local/bin
 fi
+
 
 # aliases and commands
 alias cp='cp --verbose'
@@ -45,6 +48,7 @@ alias less='less -R'
 alias wine64="WINEPREFIX=$XDG_DATA_HOME/wine/64bit/ WINEARCH=win64 wine64"
 alias winecfg64="WINEPREFIX=$XDG_DATA_HOME/wine/64bit/ WINEARCH=win64 winecfg"
 alias winetricks64="WINEPREFIX=$XDG_DATA_HOME/wine/64bit/ WINEARCH=win64 winetricks"
+alias remote_desktop='xfreerdp /u:LOGIN /d:SERVER /dynamic-resolution /v:URL'
 alias vim='nvim'
 alias feh='feh --scale-down'
 alias startx="startx $XDG_CONFIG_HOME/xserver/xinitrc"
@@ -52,6 +56,10 @@ alias twitter="twitter --oauth=$XDG_CONFIG_HOME/.twitter_oauth"
 alias diff='diff --color=always'
 alias djvu2pdf='ddjvu -format=pdf -quality=85 -verbose'
 alias lf='lfub'
+alias anic='ani-cli'
+alias anicc='ani-cli -c'
+alias lobsterc='lobster -c'
+alias memo='vim memo$(date +%Y%m%d)'
 
 lfcd () {
     tmp="$(mktemp)"
@@ -62,7 +70,3 @@ lfcd () {
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
-
-# load ADMINSCRIPTS variable from a write-restricted file
-# small safety measure, don't know how to do better than that
-source /usr/local/share/adminvars

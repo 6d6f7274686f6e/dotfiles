@@ -39,11 +39,16 @@ URxvt.clipboard.pastecmd: xsel -ob
 URxvt.inputMethod: ibus
 URxvt.preeditType: OverTheSpot
 
+rofi.lines:           6
+rofi.fixed-num-lines: false
+rofi.font:            Whatever 18
+rofi.eh:              2
 rofi.separator-style: solid
-rofi.eh: 2
-rofi.font: DejaVu Sans 22
+rofi.hide-scrollbar:  false
+rofi.location:        0
+rofi.yoffset:         -200
 
-URxvt.depth:            32
+URxvt.depth: 32
 
 *background:  #151515
 *foreground:  #878787
@@ -83,3 +88,5 @@ URxvt.depth:            32
 *color7:      #878787
 
 #include "wal/colors.xresources"
+rofi.color-normal: #1D1C24,#C4CFD9,#1D1C24,#9AA4AD,#1D1C24
+rofi.color-window: #1D1C24,#C4CFD9,#9AA4AD

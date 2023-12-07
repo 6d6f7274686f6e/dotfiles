@@ -8,6 +8,7 @@ n=$(/usr/bin/ls $ADMINSCRIPTS/powerplans | wc -l)
 
 answer=$(/usr/bin/ls $ADMINSCRIPTS/powerplans/ | /usr/bin/rofi -dmenu -i -p "Use powerplan" -lines $n \
   -hide-scrollbar -font "Whatever 18" -color-window "$color0,$color7,$color4" \
+  -fixed-num-lines -yoffset 0 \
   -color-normal "$color0,$color7,$color0,$color4,$color0")
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

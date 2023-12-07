@@ -17,12 +17,13 @@ else
   [ $opacity -lt 100 ] || wal -f $XDG_CACHE_HOME/wal/colors
 fi
 
+source "$XDG_CACHE_HOME/wal/colors.sh"
+
+sed -i "s/^rofi.color-normal.*/rofi.color-normal: $color0,$color7,$color0,$color4,$color0/g" $XDG_CONFIG_HOME/xserver/Xresources
+sed -i "s/^rofi.color-window.*/rofi.color-window: $color0,$color7,$color4/g" $XDG_CONFIG_HOME/xserver/Xresources
 xrdb -I$XDG_CACHE_HOME $XDG_CONFIG_HOME/xserver/Xresources
 
 ~/.fehbg
-
-source "$XDG_CACHE_HOME/wal/colors.sh"
-
 background=${color0:1}
 foreground=${color7:1}
 txt_background=${color0:1}

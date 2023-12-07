@@ -2,11 +2,18 @@ source ~/.profile
 export __GL_SHADER_DISK_CACHE_PATH=~/.cache/nv/
 export ERRFILE=~/.config/xserver/xsessions-errors
 export DWMSCRIPTS=/usr/local/bin/scripts/dwm
+#export XAUTHORITY=~/.config/xserver/Xauthority
+export GTK_IM_MODULE=ibus
+export XMODIFIERS=@im=ibus
+export QT_IM_MODULE=ibus
+export XIM_PROGRAM=/usr/bin/ibus-daemon 
 
 xrandr --dpi 96
-setxkbmap fr
+xrandr --auto
+xrandr --output DP-4 --left-of HDMI-0
+setxkbmap fr &
 ~/.fehbg &
-xrdb -I$XDG_CACHE_HOME $XDG_CONFIG_HOME/xserver/Xresources
+xrdb -I$XDG_CACHE_HOME $XDG_CONFIG_HOME/xserver/Xresources &
 xcompmgr -f -D5 &
 pgrep dwmblocks || dwmblocks &
 killall -9 dunst
@@ -16,6 +23,6 @@ pgrep mpd$ || mpd &
 pgrep mpdscribble || mpdscribble &
 pgrep mpdiscord || mpdiscord &
 ibus-daemon -drx --panel /usr/lib/ibus/ibus-ui-gtk3 &
-yams
-numlockx on
+# yams &
+numlockx on &
 dwm

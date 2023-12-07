@@ -6,10 +6,11 @@ report+=$(nvidia-smi -q -d TEMPERATURE | grep "GPU Current" | awk '{print "\\nGP
 report+=$(sensors | grep cpu_fan | awk '{print "\nFan speed:", $2, "RPM\\n"}')
 report+=$(cpupower frequency-info | grep -e "current CPU frequency.*Hz" | awk '{print "CPU frequency: " $4 $5}')
 
+pgrep dunst >/dev/null || dunst &!
+
 case $BLOCK_BUTTON in
   1) notify-send -u low "Performance report" "$report" ;;
   2) $DWMSCRIPTS/select_powerplan 2>&1 /dev/null & ;;
-  3) $DWMSCRIPTS/fan_control 2>&1 /dev/null & ;;
 esac > /dev/null
 
 acpi -t | awk '{print $4 "°C"}' | tr -d '\n'

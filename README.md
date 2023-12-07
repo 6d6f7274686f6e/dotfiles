@@ -171,12 +171,6 @@ Subfolders of `/usr/local/sbin/scripts/` store scripts that should only be execu
 Their ownership should be set to root (`sudo chown root:root -R /usr/local/sbin/scripts/`).
 You should also make sure that they are executable with `sudo chmod +x /usr/local/sbin/scripts/ -R`.
 
-Scripts in the `internet` subfolder manage, well, internet connections.
-You should change the `enp3s0` and `wlp2s0` to whatever your ethernet and wifi interfaces' names are (you can get them
-with `ip link`). Also included is a WiFi script that use the `/etc/wpa_supplicant/wifi_example.conf`, which has to be
-modified to connect to your desired access point. By default, you can choose to launch one of these internet scripts by
-hitting the `Super+Shift+N` keys in `dwm`.
-
 The `powerplans` subfolder holds scripts that change the computer speeds to maximize either performance or battery life.
 They are specific to Intel computers and you ideally shouldn't have to use them unless your computer has temperature or
 battery issues. They're tied to the `Super+Shift+X` keys in `dwm`.

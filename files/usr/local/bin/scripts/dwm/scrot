@@ -1,22 +1,22 @@
 #!/bin/bash
 
+pgrep dunst >/dev/null || dunst &!
+
 if [ "$1" = "sel" ]; then
-    notify-send -u low "Screenshot" "Please select a window or rectangular area." -t 1000
+    notify-send -u low "Screenshot" "Please select a window or rectangular area." -t 500
     sleep 1
   if [ -z "$2" ]; then
-      scrot '%Y%m%d-%H%M%S.png' -s -e 'mv $f ~/Media/Screenshots/Misc/; \
+      scrot '%Y%m%d-%H%M%S.png' -f -s -e 'mv $f ~/Pictures/Screenshots/Misc/; \
       notify-send -t 1000 -u low "Saved screenshot" "$f"' \
       && exit
   else
-    scrot '%Y%m%d-%H%M%S.png' -s -e 'xclip -t image/png -selection clipboard -i $f; \
+    scrot '%Y%m%d-%H%M%S.png' -f -s -e 'xclip -t image/png -selection clipboard -i $f; \
       rm $f; \
       notify-send -t 1000 -u low "Took screenshot" "Copied it to clipboard."' 
   fi
 else
   if [ -z "$2" ]; then
-#   scrot '%Y%m%d-%H%M%S.png' -e 'mv $f ~/Media/Screenshots/Misc; \
-#    scrot -a 1920,0,1280,1024 '%Y%m%d-%H%M%S.png' -e 'mv $f ~/Media/Screenshots/Cours/; \
-   scrot '%Y%m%d-%H%M%S.png' -e 'mv $f ~/Media/Screenshots/Cours/; \
+   scrot '%Y%m%d-%H%M%S.png' -e 'mv $f ~/Pictures/Screenshots/Misc; \
       notify-send -t 1000 -u low "Saved screenshot" "$f"' \
       && exit
   else

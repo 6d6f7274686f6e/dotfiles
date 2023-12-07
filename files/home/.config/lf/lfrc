@@ -1,3 +1,13 @@
+# Note on Image Previews
+# 1. ueberzug must be installed.
+# 2. The scope file (~/.config/lf/scope for me), must have a command similar to
+#    mine to generate ueberzug images.
+# 3. A `set cleaner` line as below is a cleaner script.
+# 4. lf should be started through a wrapper script (~/.local/bin/lfub for me)
+#    that creates the environment for ueberzug. This command can be be aliased
+#    in your shellrc (`alias lf="lfub") or if set to a binding, should be
+#    called directly instead of normal lf.
+
 # Basic vars
 set shellopts '-eu'
 set ifs "\n"
@@ -7,6 +17,8 @@ set drawbox
 set period 1
 set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/scope'
+set mouse
+set cursorpreviewfmt "\033[7m"
 
 # cmds/functions
 cmd open ${{
@@ -17,7 +29,7 @@ cmd open ${{
     text/*|application/json|inode/x-empty) $EDITOR $fx;;
     image/x-xcf) setsid -f gimp $f >/dev/null 2>&1 ;;
     image/svg+xml) display -- $f ;;
-    image/*) setsid -f feh --start-at $f 2>/dev/null ;;
+    image/*) setsid -f feh -. --start-at $f 2>/dev/null ;;
     audio/*) mpv --audio-display=no $f ;;
     video/*) setsid -f mpv $f -quiet >/dev/null 2>&1 ;;
     application/pdf|application/vnd*|application/epub*) setsid -f zathura $fx >/dev/null 2>&1 ;;
@@ -68,7 +80,7 @@ cmd copyto ${{
 	notify-send "📋 File(s) copied." "File(s) copies to $dest."
 }}
 
-cmd setbg "$1"
+cmd setbg ""
 cmd bulkrename $vidir
 
 # Bindings
@@ -90,12 +102,11 @@ map o &mimeopen $f
 map O $mimeopen --ask $f
 
 map A rename # at the very end
-map c push A<c-u> # new rename
 map I push A<c-a> # at the very beginning
-map i push A<a-b><a-b><a-f> # before extention
-map a push A<a-b> # after extention
+map i push A<a-b><a-b><a-f> # before file extension
+map a push A<a-b> # after file extension
 map B bulkrename
-map b $setbg $f
+map bg $sh /usr/local/bin/scripts/dwm/theme $f
 
 map <c-e> down
 map <c-y> up
@@ -104,3 +115,8 @@ map V push :!nvim<space>
 map W $setsid -f st >/dev/null 2>&1
 
 map Y $printf "%s" "$fx" | xclip -selection clipboard
+
+map <m-1> open
+map <m-2> updir
+map <m-down> down
+map <m-up> up

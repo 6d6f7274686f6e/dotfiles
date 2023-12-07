@@ -1,4 +1,4 @@
-set page-padding 2
+#set page-padding 0
 
 set font "monospace normal 9"
 
@@ -36,3 +36,5 @@ set recolor-reverse-video "true"
 # set recolor "true"
 
 set guioptions none
+
+set first-page-column 1:1

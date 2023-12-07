@@ -8,4 +8,4 @@ case $BLOCK_BUTTON in
   5) cmd=dec ;;
 esac
 
-VOLUME_COMMAND=$cmd /usr/local/bin/scripts/dwm/volume | tr -d '\n\r'
+VOLUME_COMMAND=$cmd /usr/local/bin/scripts/dwm/volume

@@ -146,7 +146,20 @@ let g:sparkupExecuteMapping = ';e'
 let g:netrw_browsex_viewer= "firefox"
 
 " LaTeX files
-autocmd Filetype tex nnoremap ;c :w<Enter>:!pdflatex "%"<Enter><Enter>
+autocmd Filetype tex nnoremap ;w :w<Enter>:!pdflatex "%"<Enter><Enter>
+autocmd Filetype tex inoremap ;c \begin{center}<Enter><Enter>\end{center}<Up>
+autocmd Filetype tex inoremap ;g \includegraphics[width=\textwidth]{}<Left>
+autocmd Filetype tex inoremap ;ii \begin{itemize}<Enter>\item <Enter>\end{itemize}<Up>
+autocmd Filetype tex inoremap ;u \begin{enumerate}<Enter>\item <Enter>\end{enumerate}<Up>
+autocmd Filetype tex inoremap ;it \item 
+autocmd Filetype tex inoremap ;$$ $$<Enter>$$<Up><Esc>o
+autocmd Filetype tex inoremap ;$i $$<Left>
+autocmd Filetype tex inoremap ;$c \begin{dcases}<Enter><++>&\text{ <++>},\\<Enter><++>&\text{ <++>}.<Enter>\end{dcases}<Up><Up><Up>
+autocmd Filetype tex inoremap ;$a \[\begin{aligned}<Enter>\end{aligned}\]<Up><Esc>o
+autocmd Filetype tex inoremap ;ff \begin{frame}{<Enter>\end{frame}<Up><Esc>$a}<Left>
+autocmd Filetype tex inoremap ;ft \begin{frame}[t]{<Enter>\end{frame}<Up><Esc>$a}<Left>
+autocmd Filetype tex inoremap ;mm \begin{minipage}{\textwidth}<Enter>\end{minipage}<Up><Esc>o
+autocmd Filetype tex inoremap ;mt \begin{minipage}[t]{\textwidth}<Enter>\end{minipage}<Up><Esc>o\vspace{0em}<Enter>
 " C files
 autocmd Filetype c nnoremap ;c :w<Enter>:!gcc "%" -o program<Enter><Enter>
 
@@ -157,9 +170,9 @@ autocmd Filetype c nnoremap ;c :w<Enter>:!gcc "%" -o program<Enter><Enter>
 "  neocomplcache (advanced completion)
 autocmd BufEnter *.hs,*.lhs let g:neocomplcache_enable_at_startup = 1
 function! SetToCabalBuild()
-  if glob("*.cabal") != ''
-    set makeprg=cabal\ build
-  endif
+    if glob("*.cabal") != ''
+        set makeprg=cabal\ build
+    endif
 endfunction
 autocmd BufEnter *.hs,*.lhs :call SetToCabalBuild()
 
