@@ -1,0 +1,31 @@
+* {
+    selected-normal-foreground:  color0;
+    foreground:                  color7;
+    normal-foreground:           @foreground;
+    alternate-normal-background: color0 ;
+    red:                         color4;
+    selected-urgent-foreground:  color0;
+    blue:                        color4;
+    urgent-foreground:           color0;
+    alternate-urgent-background: color7;
+    active-foreground:           color0;
+    lightbg:                     color4;
+    selected-active-foreground:  color0;
+    alternate-active-background: color0;
+    background:                  color0;
+    bordercolor:                 color4;
+    alternate-normal-foreground: @foreground;
+    normal-background:           color0;
+    lightfg:                     color4;
+    selected-normal-background:  color4;
+    border-color:                @foreground;
+    spacing:                     2;
+    separatorcolor:              color4 ;
+    urgent-background:           color7 ;
+    selected-urgent-background:  color0 ;
+    alternate-urgent-foreground: color0 ;
+    background-color:            color0 ;
+    alternate-active-foreground: color0 ;
+    active-background:           color4 ;
+    selected-active-background:  color4 ;
+}
