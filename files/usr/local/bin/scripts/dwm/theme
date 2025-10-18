@@ -58,11 +58,11 @@ tmpbgbak="$XDG_CONFIG_HOME/xlock/screen.png"
 tmpbg="$(cut -d\' -f2 ~/.fehbg | sed -n 2p)"
 export MAGICK_OCL_DEVICE=OFF
 
-echo Updating zathura config files...
+echo Updating config files...
 $XDG_CONFIG_HOME/zathura/.rcgen > $XDG_CONFIG_HOME/zathura/zathurarc
-echo Done.
-echo Updating dunst config files...
+$XDG_DATA_HOME/rofi/themes/.rcgen > $XDG_DATA_HOME/rofi/themes/wal.rasi
 $XDG_CONFIG_HOME/dunst/.rcgen > $XDG_CONFIG_HOME/dunst/dunstrc
+echo Done.
 echo Restarting dunst...
 pgrep dunst && killall dunst
 eval $(dbus-launch)
