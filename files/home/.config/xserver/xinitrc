@@ -14,7 +14,7 @@ xrandr --output DP-4 --left-of HDMI-0
 setxkbmap fr &
 ~/.fehbg &
 xrdb -I$XDG_CACHE_HOME $XDG_CONFIG_HOME/xserver/Xresources &
-xcompmgr -f -D5 &
+picom -f -D5 --vsync &
 pgrep dwmblocks || dwmblocks &
 killall -9 dunst
 dunst &
