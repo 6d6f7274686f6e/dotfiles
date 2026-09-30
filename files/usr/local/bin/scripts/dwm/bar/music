@@ -13,13 +13,15 @@ for i in $(mpc --format ""); do
     break
 done
 
-current=`mpc current | tr -d '\n\r'`
+current=`mpc -f "%artist% - %title%" | head -n 1`
 [ -z "$current" ] && return 1
 
 if [ $a = "[playing]" ] ; then
   echo -ne "  "
 elif [ $a = "[paused]" ] ; then
   echo -ne "  "
+else
+  return 1
 fi
 
-echo -ne "${current:0:70}"
+echo -ne "${current}"

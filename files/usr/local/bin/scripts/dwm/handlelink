@@ -2,6 +2,8 @@
 
 source $XDG_CACHE_HOME/wal/colors.sh
 
+echo $@
+
 link="$1"
 
 handler=$(echo -e "firefox\nsurf\nchromium\nmpv" | rofi -dmenu -i -p "Choose a link handler" \
@@ -9,4 +11,5 @@ handler=$(echo -e "firefox\nsurf\nchromium\nmpv" | rofi -dmenu -i -p "Choose a l
 -fixed-num-lines -yoffset 0 \
 -color-normal "$color0,$color7,$color0,$color4,$color0")
 
+export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 [ "$link" ] && [ "$handler" ] && $handler "$link"

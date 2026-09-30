@@ -6,5 +6,5 @@ link=$(echo "" \
   | rofi -dmenu -i -p "URL" -1 -lines 0 -font "Whatever 18" -color-window "$color0,$color7,$color0" \
   -fixed-num-lines -yoffset 0 \
   -color-normal "$color0,$color7,$color0,$color4,$color0")
-sleep 1
+#sleep 1
 [ "$link" ] && $DWMSCRIPTS/handlelink "$link"

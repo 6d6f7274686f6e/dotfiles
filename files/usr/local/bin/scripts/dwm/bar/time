@@ -1,3 +1,8 @@
 #!/bin/sh
 
+
+case $BLOCK_BUTTON in
+  3) xclip -i /dev/null
+esac
+
 date '+%H:%M:%S' | tr -d '\r\n'
